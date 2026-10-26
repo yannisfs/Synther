@@ -95,7 +95,7 @@ Hard rules: never tick a box without a PASS line, never edit the check scripts t
 
 ## Still open for the owner
 
-- Decisions: D4 (Help nav label), D5 (city), D7 (legal entity), D8 (Imprint phone) — all four are settled as of 25 Oct 2026; see the Agent notes.
+- Decisions: D4 (Help nav label), D5 (city), D7 (legal entity), D8 (Imprint phone) — all four are settled as of 25 Oct 2026; see the Agent notes. D9 (26 Oct 2026) reverses D8: a phone number is wanted back on the site, the code path is built, and the number is being ordered — the owner will send it when it exists.
 - Legal review: the 3-year IP/user-agent consent record, the Cloudflare data processing agreement, and the form-submission service.
 - Deploy: only on the owner's explicit go-ahead.
 
@@ -525,13 +525,65 @@ Verified on the live site after the deploy:
 | `/api/contact`, `/api/quick-consult`, `/api/consent` | deployed, 405 on GET as designed |
 | Live imprint | 0 × "Telefon", "Contact (phone)", "callbackPhone", "+49", "TODO", "Synther GmbH"; "Yannis Fusenig" ×6, "Rodgau" ×5, 1 × mailto |
 
+### D9 — the phone number is coming (26 Oct 2026)
+
+The owner's reversal of D8: *"i realized we need a phone number"*. The
+number itself does not exist yet — the owner's answer to how it will be
+obtained: *"don't have one yet, might need to order one and will let you
+know once it's there."*
+
+So the phone is **built but empty**: the code path is in place, the
+number is not. Nothing on the live site changes until the number
+arrives, and no deploy is needed for the plumbing alone.
+
+- `src/data/content.js` — `company.phone` (currently `null`) is the one
+  place the number is written. `phoneHref()` derives the `tel:` link from
+  the display string, so the two can never disagree.
+- `src/pages/ImprintPage.private.jsx` — the phone row is rendered in the
+  DE and the EN field list **only while `company.phone` is set**, so the
+  legal page never shows an empty row and never a "[TODO — replace]".
+- `src/pages/ImprintPage.gmbh.jsx` — the same conditional row, reading
+  the same constant. The dormant template therefore needs no further
+  edit at the flip: set the number once, both templates show it.
+- `src/components/Contact.jsx` + `src/data/content.js` (`contactDirect`)
+  — the contact sidebar gains a "Phone" row (new Lucide `phone` icon)
+  when a number is published.
+- `src/locales/en.json` — `contact.direct.phone.label` = "Phone". The
+  imprint label already existed in both locales ("Kontakt (Telefon)" /
+  "Contact (phone)") and was not changed.
+
+Verification of the empty state and of the wiring:
+
+- `D4_LABEL="Support" bash scripts/check.sh` → **42 PASS · 0 SKIP · 1 FAIL**
+  (V04, the known preview-server-only failure).
+- With `company.phone` still `null`, `dist/imprint/index.html` has 0
+  hits for "+49 176", "Kontakt (Telefon)" and "Contact (phone)" — the
+  site is byte-for-byte the same as the deployed version.
+- With a test number set (+49 176 12345678), the imprint rendered it
+  twice (DE + EN) with `tel:+4917612345678` links and the labels
+  "Kontakt (Telefon)" / "Contact (phone)", and the contact sidebar
+  rendered one "Phone" row with its own `tel:` link. The test value was
+  reverted; the number is `null` in the source.
+
+To publish it, one edit:
+
+```js
+// src/data/content.js
+phone: '+49 176 12345678',
+```
+
+then `D4_LABEL="Support" bash scripts/check.sh` and a deploy on the
+owner's go-ahead. Nothing else needs touching.
+
 ### Still open for the owner
 
 - Decisions: none open. D4 (nav label) = "Support", D5 (region) =
   Frankfurt Rhine-Main, D7 (legal entity) = the registered private
   person, with the GmbH wording waiting in the source for the
   registration (see "Legal indicators" above), D8 (phone) = removed
-  for now.
+  for now — and D9 (26 Oct) reverses it: the phone number is wanted
+  back, the plumbing is built, and the number itself is being ordered
+  (see "D9" above).
 - Legal review: the 3-year IP/user-agent consent record, the Cloudflare data processing agreement, and the form-submission service.
 - The v3 changes are code-level only; the visual review of the new
   banner button, menu icon and step columns is still the owner's eye

@@ -16,18 +16,21 @@
 // real GmbH data before the flip.
 //
 // One deliberate exception (25 Oct 2026, owner decision D8): the
-// "Contact (phone)" row is no longer part of the template. There is no
-// number to publish yet, so the row was removed from both field lists
-// and from the TODO callout. The `imprint.fields.phone` label stays in
-// the locale files, so putting a number back later is a one-line
-// change: re-add `<Field label={…('imprint.fields.phone')} value={…} />`
-// to each of the two field lists and the matching TODO entry.
+// "Contact (phone)" row is not part of the company-specific data — it
+// is read from `company.phone` in src/data/content.js and rendered only
+// while a number is actually published, exactly like the private
+// template does. So the flip never publishes an empty phone row, and
+// publishing a number later needs no change here at all. The label
+// stays in the locale files; there is no phone entry in the TODO
+// callout, because the number is not a placeholder — it is either set
+// or absent.
 
 import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import useReveal from '../hooks/useReveal.js'
 import { fixedT } from '../lib/fixedT.js'
+import { company, phoneHref } from '../data/content.js'
 
 // The /imprint page. The legally-binding German Impressum and
 // Datenschutzerklärung are the primary content (§ 5 DDG, Art. 13 DSGVO).
@@ -121,6 +124,13 @@ export default function ImprintPage() {
                 value="hello@synther.gmbh"
                 href="mailto:hello@synther.gmbh"
               />
+              {company.phone && (
+                <Field
+                  label={deT('imprint.fields.phone')}
+                  value={company.phone}
+                  href={phoneHref(company.phone)}
+                />
+              )}
               <Field
                 label={deT('imprint.fields.register')}
                 value={`${deT('imprint.fields.registerCourt')}: ${TODO} · ${deT('imprint.fields.registerNumber')}: ${TODO}`}
@@ -162,6 +172,13 @@ export default function ImprintPage() {
               value="hello@synther.gmbh"
               href="mailto:hello@synther.gmbh"
             />
+            {company.phone && (
+              <Field
+                label={t('imprint.fields.phone')}
+                value={company.phone}
+                href={phoneHref(company.phone)}
+              />
+            )}
             <Field
               label={t('imprint.fields.register')}
               value={`${t('imprint.fields.registerCourt')}: ${TODO} · ${t('imprint.fields.registerNumber')}: ${TODO}`}

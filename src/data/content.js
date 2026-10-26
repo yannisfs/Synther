@@ -5,7 +5,18 @@
 
 export const company = {
   email: 'contact@synther.eu',
+  // The published phone number. `null` means "no number published": the
+  // imprint and the contact sidebar then skip the phone row entirely
+  // rather than rendering an empty one. Set it to the display format
+  // (e.g. '+49 176 12345678') — the tel: link is derived from it by
+  // phoneHref() below.
+  phone: null,
 }
+
+// tel: href for a published phone number — strips the formatting
+// characters, so '+49 176 12345678' becomes '+4917612345678'.
+export const phoneHref = (phone) =>
+  phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : null
 
 // The party behind the site, as currently registered: a private person.
 //
@@ -63,6 +74,13 @@ export const heroMeta = [{ key: 'disciplines' }]
 // translatable prose); region/response values come from the locale.
 export const contactDirect = [
   { icon: 'mail', key: 'email', href: `mailto:${company.email}` },
+  // The phone row appears only while a number is published
+  // (company.phone). Keeping it in this list — rather than hard-coding
+  // it in the component — means the number is added or removed in one
+  // place and the sidebar and the imprint stay in sync.
+  ...(company.phone
+    ? [{ icon: 'phone', key: 'phone', href: phoneHref(company.phone) }]
+    : []),
   { icon: 'pin', key: 'region' },
   { icon: 'clock', key: 'response' },
 ]

@@ -29,12 +29,14 @@ import { useTranslation } from 'react-i18next'
 import useReveal from '../hooks/useReveal.js'
 import usePageSeo from '../hooks/usePageSeo.js'
 import { fixedT } from '../lib/fixedT.js'
-import { company, legalIdentity } from '../data/content.js'
+import { company, legalIdentity, phoneHref } from '../data/content.js'
 
 // Private-person imprint data. Module-scope (not inside the component)
 // so the PrivacyBody / PrivacyBodyEN subcomponents below can also read
-// them. The optional phone row was dropped rather than left as a
-// placeholder, so nothing on the published page says "[TODO — replace]".
+// them. The phone row is rendered from company.phone, and only while a
+// number is actually published — nothing on the published page says
+// "[TODO — replace]", and no empty row appears while the number is
+// still missing.
 //
 // The registered indicators (name + address) are not written here but
 // read from src/data/content.js, so that this page, the footer's legal
@@ -129,8 +131,9 @@ export default function ImprintPage() {
               {/* Private-person field set: name (Anbieter), address, email.
                   All rows that require a registered company
                   (Registereintrag, USt-ID, Steuernummer, § 18 MStV
-                  responsible person) are intentionally omitted, and so is
-                  the optional phone row — no number is published. */}
+                  responsible person) are intentionally omitted. The
+                  phone row is rendered only while company.phone holds a
+                  number, so the legal page never shows an empty row. */}
               <Field label={deT('imprint.fields.provider')} value={NAME} />
               <Field label={deT('imprint.fields.address')} value={ADDRESS} />
               <Field
@@ -138,6 +141,13 @@ export default function ImprintPage() {
                 value={EMAIL}
                 href={`mailto:${EMAIL}`}
               />
+              {company.phone && (
+                <Field
+                  label={deT('imprint.fields.phone')}
+                  value={company.phone}
+                  href={phoneHref(company.phone)}
+                />
+              )}
             </dl>
           </div>
         </div>
@@ -172,6 +182,13 @@ export default function ImprintPage() {
               value={EMAIL}
               href={`mailto:${EMAIL}`}
             />
+            {company.phone && (
+              <Field
+                label={t('imprint.fields.phone')}
+                value={company.phone}
+                href={phoneHref(company.phone)}
+              />
+            )}
           </dl>
         </div>
       </section>

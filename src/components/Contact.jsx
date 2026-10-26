@@ -366,13 +366,15 @@ export default function Contact() {
                 const value =
                   row.key === 'email'
                     ? company.email
-                    : t(`contact.direct.${row.key}.value`, {
-                        // D5: the region the operator is based in. The
-                        // country (site.location) stays in the schema
-                        // markup as the service area — this is where the
-                        // work comes from.
-                        region: t('site.region'),
-                      })
+                    : row.key === 'phone'
+                      ? company.phone
+                      : t(`contact.direct.${row.key}.value`, {
+                          // D5: the region the operator is based in. The
+                          // country (site.location) stays in the schema
+                          // markup as the service area — this is where the
+                          // work comes from.
+                          region: t('site.region'),
+                        })
                 return (
                   <li className="contact__direct-row" key={row.key}>
                     <Icon

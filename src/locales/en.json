@@ -963,6 +963,9 @@
       "email": {
         "label": "Email"
       },
+      "phone": {
+        "label": "Phone"
+      },
       "region": {
         "label": "Region",
         "value": "{{region}} · remote-first"
