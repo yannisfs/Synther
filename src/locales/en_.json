@@ -1,0 +1,489 @@
+{
+  "site": {
+    "name": "Synther",
+    "brand": "SYNTHER",
+    "legalName": "Synther GmbH",
+    "location": "Germany",
+    "tagline": "Engineering synthesis.",
+    "shortPitch": "Transforming disparate systems and data into a singular point of decision.",
+    "email": "hello@synther.gmbh"
+  },
+  "title": {
+    "home": "Synther - Systems Engineering & Data-Driven Decisions"
+  },
+  "seo": {
+    "description": "Synther delivers systems engineering, process optimization and complex data analytics - engineering the physical and digital systems that decide what comes next."
+  },
+  "nav": {
+    "offerings": "Offerings",
+    "approach": "Approach",
+    "contact": "Contact",
+    "cta": "Start a project",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "ariaBrand": "Synther"
+  },
+  "hero": {
+    "titleLead": "Engineering",
+    "titleAccent": "synthesis",
+    "ctaPrimary": "Start a project",
+    "ctaSecondary": "Explore offerings",
+    "scroll": "SCROLL"
+  },
+  "heroMeta": {
+    "disciplines": {
+      "label": "Disciplines",
+      "value": "Systems · Machines · Process · Data · Software"
+    }
+  },
+  "stats": {
+    "ariaLabel": "Key figures",
+    "systems": { "label": "Systems & machines in production" },
+    "sectors": { "label": "Industry sectors served" },
+    "efficiency": { "label": "Median process efficiency gain" },
+    "uptime": { "label": "Uptime on delivered platforms" }
+  },
+  "vision": {
+    "ariaLabel": "Vision",
+    "quote": "At Synther, we act as the single point of synthesis -",
+    "quoteBold": "the center where complex data streams and operational systems unite to generate intelligent decisions.",
+    "attribution": "Synther"
+  },
+  "about": {
+    "eyebrow": "Who we are",
+    "title": "The single point of synthesis between your systems and your decisions.",
+    "body1": "{{name}} is where complex data streams and operational systems unite. We work at the intersection of engineering discipline and statistical rigour - transforming disparate systems and data into a singular point of decision.",
+    "body2": "Our teams combine mechanical, electrical and software engineers with data scientists and operations specialists. The same first-principles mindset runs through a business process, a special-purpose machine and a high-complexity data set - whether we are re-engineering a workflow, designing hardware that ships or building the analytics that surface what matters in the noise. The result: disparate signals synthesized into one decision-grade picture, reliable under real-world conditions.",
+    "principles": [
+      "Synthesis over separation",
+      "First principles over precedent",
+      "Decisions engineered, not guessed"
+    ]
+  },
+  "offerings": {
+    "eyebrow": "Disciplines",
+    "title": "Six disciplines, one point of synthesis.",
+    "lead": "Each discipline stands on its own - and each draws on the others. The same first-principles mindset runs from a business process to a special-purpose machine to a high-complexity data set, so every engagement converges on a single decision.",
+    "discuss": "Discuss",
+    "more": "Explore",
+    "items": {
+      "systems-engineering": {
+        "title": "Systems Engineering & Design",
+        "summary": "Architecture of complex systems - mechanical, electrical and software in one model. We derive requirements from the decision the system must support, then validate against real-world constraints.",
+        "blurb": "Architecture and traceability for complex systems.",
+        "points": ["Requirements & traceability", "Architecture trade studies", "Model-based systems engineering"],
+        "pageLead": "We design systems as a whole before anyone builds the parts - mechanical, electrical and software modelled together so the interfaces, not the components, carry the risk.",
+        "spec": [
+          { "label": "Engagement", "value": "Assessment, pilot or full build" },
+          { "label": "Approach", "value": "Stage-gated, review at each gate" },
+          { "label": "Deliverable", "value": "Model, requirements trace, V&V plan" },
+          { "label": "Hand-off", "value": "Client team operates; Synther supports" }
+        ],
+        "overview": [
+          "Most engineering failures live at the boundaries between domains - the signal that arrives late, the mount that almost fits, the firmware that assumes a tolerance the hardware never held. Systems engineering is the discipline of making those boundaries explicit before they become field failures.",
+          "We start from the decision the system must support and work outward: what must be true, measured and controlled for that decision to be sound. Requirements are derived, decomposed and traced; architecture is a hypothesis tested against constraints rather than a diagram drawn to look complete. The output is a model the whole team can build against and a trace the regulator can follow."
+        ],
+        "capabilities": [
+          { "title": "Requirements & traceability", "text": "Elicit, decompose and trace requirements from stakeholder intent down to verification evidence. Every requirement carries an owner, a source and a test.", "points": ["Stakeholder elicitation", "Decomposition & allocation", "Bi-directional trace"] },
+          { "title": "Architecture & trade studies", "text": "Generate candidate architectures as competing hypotheses, score them against weighted criteria, and keep the rejected options on record so the choice can be audited later.", "points": ["Weighted trade matrices", "Rejected-option record", "Interface definition"] },
+          { "title": "Model-based systems engineering", "text": "Maintain the system as a living model - structure, behaviour and interfaces in one source of truth - so mechanical, electrical and software work against the same definition.", "points": ["Structure & behaviour model", "Interface source-of-truth", "Cross-domain views"] },
+          { "title": "Verification & validation planning", "text": "Define what proves the system works before it is built. Test plans, acceptance criteria and V&V coverage map back to requirements so nothing closes by assertion.", "points": ["Acceptance criteria", "Test coverage map", "V&V evidence pack"] }
+        ],
+        "engagement": {
+          "lead": "Systems engineering runs across the whole lifecycle, but most engagements enter at one of three points.",
+          "steps": [
+            { "title": "Problem & boundary", "text": "We fix the system boundary, its interfaces and the decision the system must support. Requirements are elicited and decomposed before any architecture is proposed." },
+            { "title": "Architecture & trades", "text": "Candidate architectures are advanced and traded against constraints - cost, schedule, risk, compliance. The selected architecture is documented with the reasoning, not just the result." },
+            { "title": "V&V & hand-off", "text": "Verification plans are defined alongside the design so 'done' is unambiguous. We hand off a model, a trace and a plan the build teams and the regulator can follow." }
+          ]
+        },
+        "lineage": [
+          { "name": "Synther", "text": "The single point of synthesis - where every discipline converges into one decision-grade picture." },
+          { "name": "Systems Engineering & Design", "text": "This discipline. The architecture and traceability layer the other disciplines build on, and the trace the regulator follows.", "current": true },
+          { "name": "The connected disciplines", "text": "Process, Development, Data, Decisions and Consulting - each feeds the systems model and is constrained by it." }
+        ],
+        "outcomes": [
+          "A single sourced model the whole team builds against.",
+          "Requirements traced end to end, with verification evidence mapped to each.",
+          "Architecture decisions recorded with the alternatives that were rejected."
+        ],
+        "faq": [
+          { "q": "What does a systems-engineering engagement include?", "a": "Requirements elicitation and decomposition, candidate architectures traded against your constraints, a model the whole team builds against, and a V&V plan that defines what 'done' means. The deliverable is the architecture and the trace, not just a diagram." },
+          { "q": "Do we have to start at the beginning?", "a": "No. Most engagements enter where the risk is - a late integration, a requirements gap, a failing verification. A paid assessment can come before a full scope." },
+          { "q": "Do you operate the system or hand it off?", "a": "Both are possible. The default is hand-off: documentation, training and a V&V pack so your team operates and maintains it. Synther can run it alongside you if you would rather build the capability gradually." },
+          { "q": "How is an engagement scoped and priced?", "a": "By the decision the system must support and the evidence that decision requires. Scope and success criteria are fixed up front; stage gates let you stop or continue at each review." },
+          { "q": "Do you work alongside our existing engineering team?", "a": "Yes. Most engagements are mixed-team: your domain knowledge sets the constraints, Synther brings the systems method and the model. The hand-off is built in from day one." }
+        ],
+        "seo": {
+          "description": "Synther's Systems Engineering & Design discipline - architecture of complex systems with mechanical, electrical and software in one model, requirements traced end to end against real-world constraints.",
+          "canonical": "/disciplines/systems-engineering"
+        }
+      },
+      "process-optimization": {
+        "title": "Process Optimization",
+        "summary": "We isolate the binding constraint in an operational workflow and re-engineer around it - for throughput, cost and reliability, without disrupting what already works.",
+        "blurb": "Finding and breaking the binding constraint.",
+        "points": ["Constraint analysis", "Line balancing & cycle time", "Energy & resource efficiency"],
+        "pageLead": "We find the one constraint that sets the pace of an entire operation and re-engineer around it - so throughput, cost and reliability move together instead of in trade-off.",
+        "spec": [
+          { "label": "Engagement", "value": "Measurement study, pilot or full re-engineering" },
+          { "label": "Approach", "value": "Measure, diagnose, then change" },
+          { "label": "Deliverable", "value": "Constraint map, re-engineered process, control limits" },
+          { "label": "Hand-off", "value": "Client team operates; Synther stabilizes" }
+        ],
+        "overview": [
+          "Every operational process has a binding constraint - the one stage, resource or hand-off that sets the ceiling for the whole line. Optimizing anywhere else moves effort; optimizing at the constraint moves the system. The first job is to find it, and to find it with measurement rather than intuition.",
+          "We re-engineer around that constraint without disrupting what already works. Line balancing, cycle-time reduction and energy efficiency follow from the same analysis: where is time being spent, where is it being wasted, and where would a change propagate. The result is a process that is faster, cheaper and more reliable at once - not one bought at the cost of another."
+        ],
+        "capabilities": [
+          { "title": "Constraint analysis", "text": "Map the full process, measure where time and capacity actually accumulate, and identify the single binding constraint - not the most visible bottleneck, the one that governs throughput.", "points": ["Full-process mapping", "Time & capacity measurement", "Binding-constraint identification"] },
+          { "title": "Line balancing & cycle time", "text": "Redistribute work so the constraint runs at its sustainable limit and the rest of the line paces to it. Cycle time falls without adding headcount or machines.", "points": ["Sustainable pacing at the constraint", "Work redistribution", "Cycle-time reduction"] },
+          { "title": "Energy & resource efficiency", "text": "Quantify energy and material spend per unit of throughput, then target the stages where waste is structural rather than incidental.", "points": ["Per-unit spend quantified", "Structural-waste targeting", "Material & energy audit"] },
+          { "title": "Workflow re-engineering", "text": "Redesign hand-offs, routing and decision points so work flows without rework. Changes are piloted before they touch the live operation.", "points": ["Hand-off & routing redesign", "Piloted before rollout", "Rework elimination"] }
+        ],
+        "engagement": {
+          "lead": "Process work is measured before it is changed. A typical engagement runs in three stages.",
+          "steps": [
+            { "title": "Measure", "text": "We instrument the line - cycle times, dwell, hand-off delays, energy and scrap - and build a factual picture of where time and cost actually sit." },
+            { "title": "Diagnose", "text": "The binding constraint is identified and the propagation paths mapped. We model the effect of changes before making them." },
+            { "title": "Re-engineer & stabilize", "text": "Changes are piloted in isolation, validated against the model, then rolled out with control limits so the gain holds after we leave." }
+          ]
+        },
+        "outcomes": [
+          "The binding constraint identified and documented with measurement.",
+          "Throughput gains that do not trade against reliability or cost.",
+          "Control limits that hold the improvement after hand-off."
+        ],
+        "lineage": [
+          { "name": "Synther", "text": "The single point of synthesis - where every discipline converges into one decision-grade picture." },
+          { "name": "Process Optimization", "text": "This discipline. The constraint analysis that locates where throughput, cost and reliability are actually set, and the re-engineering that moves all three together.", "current": true },
+          { "name": "The connected disciplines", "text": "Systems, Development, Data, Decisions and Consulting - each informs the process model and is constrained by it." }
+        ],
+        "faq": [
+          { "q": "What does a process-optimization engagement include?", "a": "Measurement of the real process - cycle times, dwell, hand-off delays, energy and scrap - followed by diagnosis of the binding constraint and a re-engineered process piloted before it touches the live operation. The deliverable is the gain and the control limits that hold it." },
+          { "q": "Do we have to stop the line to start?", "a": "No. The measurement phase runs alongside the live operation. Changes are piloted in isolation and validated against the model before any rollout, so what already works is never disrupted for the sake of measurement." },
+          { "q": "What if we already know our bottleneck?", "a": "Often the visible bottleneck is not the binding one. We measure before we act, because optimizing anywhere other than the constraint moves effort, not throughput. An assessment can confirm or correct the intuition quickly." },
+          { "q": "How is an engagement scoped and priced?", "a": "By the constraint and the gain it unlocks. Scope and success criteria are fixed up front against measured baselines, and changes are piloted before they are committed." },
+          { "q": "Will the improvement hold after you leave?", "a": "Control limits and monitoring are part of the hand-off, not an afterthought. The process is stabilized against measured limits so the gain survives the return to normal operation." }
+        ],
+        "seo": {
+          "description": "Synther's Process Optimization discipline - finding the binding constraint in an operational workflow and re-engineering around it for throughput, cost and reliability, without disrupting what already works.",
+          "canonical": "/disciplines/process-optimization"
+        }
+      },
+      "development": {
+        "title": "Development & Engineering",
+        "summary": "Physical and digital, built together - machine design, mechatronics and embedded code on one bench, from first prototype to production hand-off.",
+        "blurb": "Hardware and software built on one bench.",
+        "points": ["Machine & mechanical design", "Embedded & cloud software", "Prototyping to production"],
+        "pageLead": "Physical and digital built on one bench - machine design, mechatronics and embedded code developed together so hardware and software meet reality at the same time.",
+        "spec": [
+          { "label": "Engagement", "value": "Prototype, iteration program or production hand-off" },
+          { "label": "Approach", "value": "Bench-integrated, fail fast and report" },
+          { "label": "Deliverable", "value": "Design package, interface definition, test fixtures" },
+          { "label": "Hand-off", "value": "Transferred to manufacture with documentation" }
+        ],
+        "overview": [
+          "The slowest and most expensive failures happen when hardware and software are developed in separate rooms and meet for the first time at integration. A tolerance the firmware assumed, a load case the housing never saw, a sensor that drifts outside its calibrated band - each is a meeting that should have happened earlier.",
+          "We develop the mechanical, mechatronic and embedded parts of a machine against a shared interface definition, on one bench, from first prototype to production hand-off. The firmware runs against real hardware as soon as there is hardware to run against; the hardware is designed around what the software actually needs to measure and control. Prototypes are engineered to fail fast and to be informative when they do."
+        ],
+        "capabilities": [
+          { "title": "Machine & mechanical design", "text": "Structure, mechanism and housing designed for the loads, tolerances and access the real duty cycle demands - modelled, validated and drawn for manufacture.", "points": ["Structure & mechanism", "Load & tolerance modelling", "Drawn for manufacture"] },
+          { "title": "Mechatronics & control", "text": "Sensing, actuation and control loops developed alongside the mechanics so dynamic behaviour is designed in, not tuned out at the end.", "points": ["Sensing & actuation", "Control-loop design", "Dynamic behaviour built in"] },
+          { "title": "Embedded & cloud software", "text": "Firmware that runs the machine and services that receive its telemetry - one codebase strategy across the edge and the backend.", "points": ["Edge firmware", "Backend telemetry services", "One codebase strategy"] },
+          { "title": "Prototyping to production", "text": "Prototypes built to expose assumptions to reality, then hardened toward a production hand-off with documentation the manufacturer can build from.", "points": ["Risk-exposing prototypes", "Hardening toward production", "Manufacture-ready docs"] }
+        ],
+        "engagement": {
+          "lead": "Development engagements scale from a single prototype to a full production hand-off.",
+          "steps": [
+            { "title": "Prototype", "text": "The smallest build that exposes the riskiest assumptions - physical and digital together - engineered to fail fast and report why." },
+            { "title": "Iterate & integrate", "text": "Hardware and software meet on the bench early and often. Each iteration closes a measured gap against the interface definition." },
+            { "title": "Production hand-off", "text": "The design is hardened, documented and transferred to manufacture - with the test fixtures and acceptance criteria that keep the build honest." }
+          ]
+        },
+        "outcomes": [
+          "Hardware and software validated against a shared interface definition.",
+          "Prototypes that expose risk early instead of hiding it until integration.",
+          "Documentation a contract manufacturer can build and test against."
+        ],
+        "lineage": [
+          { "name": "Synther", "text": "The single point of synthesis - where every discipline converges into one decision-grade picture." },
+          { "name": "Development & Engineering", "text": "This discipline. The mechanical, mechatronic and embedded build that meets reality on one bench, against a shared interface definition.", "current": true },
+          { "name": "The connected disciplines", "text": "Systems, Process, Data, Decisions and Consulting - each sets a constraint the build must satisfy." }
+        ],
+        "faq": [
+          { "q": "What does a development engagement include?", "a": "Machine, mechatronic and embedded design developed together against a shared interface definition, from first prototype to production hand-off. The deliverable is a design package and documentation a contract manufacturer can build and test against." },
+          { "q": "Do we have to start from scratch?", "a": "No. Engagements scale from a single risk-exposing prototype to a full production hand-off. A paid assessment can target the specific integration or interface where the risk actually sits." },
+          { "q": "Why develop hardware and software together?", "a": "Because the most expensive failures live at the meeting of the two - a tolerance the firmware assumed, a load case the housing never saw. Developing on one bench against a shared interface definition makes those meetings happen early, when they are cheap." },
+          { "q": "How is an engagement scoped and priced?", "a": "By the risk the prototype must expose and the standard the production hand-off requires. Scope and acceptance criteria are fixed up front; iterations close measured gaps against the interface definition." },
+          { "q": "Do you build the production units?", "a": "We hand off to manufacture - documentation, test fixtures and acceptance criteria that keep the build honest. Synther can support the transfer and the early production runs alongside your team." }
+        ],
+        "seo": {
+          "description": "Synther's Development & Engineering discipline - machine design, mechatronics and embedded code developed together on one bench, from first prototype to production hand-off.",
+          "canonical": "/disciplines/development"
+        }
+      },
+      "data-analytics": {
+        "title": "Complex Data Analytics",
+        "summary": "High-dimensional, multi-source data turned into structured signal. Pipelines and models that surface what matters in the noise.",
+        "blurb": "Multi-source data turned into structured signal.",
+        "points": ["Data architecture", "Statistical & ML modelling", "Real-time telemetry"],
+        "pageLead": "We turn high-dimensional, multi-source data into structured signal - pipelines and models that surface what matters in the noise.",
+        "spec": [
+          { "label": "Engagement", "value": "Decision study, pilot pipeline or production system" },
+          { "label": "Approach", "value": "Anchored to the decision the data must support" },
+          { "label": "Deliverable", "value": "Pipelines, models, documented limits" },
+          { "label": "Hand-off", "value": "Client team owns; Synther can operate" }
+        ],
+        "overview": [
+          "Operational data is rarely short; it is rarely clean, rarely aligned, and rarely at the granularity a decision needs. The work is not plotting what was collected but deciding what should have been collected, then building the path from raw signal to a number a decision can rest on.",
+          "We architect data systems around the decision they support: which streams matter, which can be discarded, which must be reconciled across sources, and which must be provable downstream. Statistical and ML models are built to be auditable - their assumptions, training data and limits documented so the output can be defended, not just produced. Real-time telemetry is treated as a first-class engineering object with schema, lineage and intent."
+        ],
+        "capabilities": [
+          { "title": "Data architecture", "text": "Design the pipelines, storage and contracts that move data from source to decision with schema and lineage intact - so the number at the end is traceable to its origin.", "points": ["Pipeline & storage design", "Schema & lineage intact", "Source-to-decision trace"] },
+          { "title": "Statistical & ML modelling", "text": "Build models with documented assumptions, training data and limits. The goal is an output that can be defended, not a metric that can be optimized.", "points": ["Documented assumptions", "Training data on record", "Defensible limits"] },
+          { "title": "Real-time telemetry", "text": "Treat every event as a first-class engineering object - schema, lineage, governance - so streaming data is reliable enough to act on, not just to display.", "points": ["Event as engineering object", "Schema & governance", "Reliable enough to act on"] },
+          { "title": "Data quality & reconciliation", "text": "Define what 'correct' means for each stream, instrument against it, and reconcile across sources so silent drift does not become a wrong decision.", "points": ["'Correct' defined per stream", "Drift instrumentation", "Cross-source reconciliation"] }
+        ],
+        "engagement": {
+          "lead": "Analytics engagements are anchored to a specific decision the data must support.",
+          "steps": [
+            { "title": "Frame the decision", "text": "We define the decision the data must inform and the confidence it requires. This fixes the bar for quality, latency and coverage before any pipeline is built." },
+            { "title": "Architect & model", "text": "Pipelines, storage and models are built to that bar - with schema, lineage and documented assumptions so the output is traceable and defensible." },
+            { "title": "Instrument & prove", "text": "We validate the output against held-out reality and document the limits. The system ships with its confidence bounds, not just the number." }
+          ]
+        },
+        "outcomes": [
+          "Data traceable from source to decision, with schema and lineage intact.",
+          "Models documented with assumptions and limits, ready to be defended.",
+          "A confidence level the decision can actually rest on."
+        ],
+        "lineage": [
+          { "name": "Synther", "text": "The single point of synthesis - where every discipline converges into one decision-grade picture." },
+          { "name": "Complex Data Analytics", "text": "This discipline. The pipelines and models that turn multi-source data into traceable, defensible signal for a decision.", "current": true },
+          { "name": "The connected disciplines", "text": "Systems, Process, Development, Decisions and Consulting - each defines the decision the data must support." }
+        ],
+        "faq": [
+          { "q": "What does a data-analytics engagement include?", "a": "A data architecture anchored to a specific decision, pipelines and models built with schema and lineage intact, and validation against held-out reality. The deliverable is a defensible output with its confidence bounds, not just the number." },
+          { "q": "We already have a lot of data - isn't that enough?", "a": "Volume is rarely the problem; alignment, cleanliness and granularity are. We start from the decision the data must support and work back to what should have been collected, rather than plotting what was." },
+          { "q": "How do you make models defensible?", "a": "Assumptions, training data and limits are documented for every model. The goal is an output that can be defended - to a regulator, a board or a peer - not a metric that can be optimized." },
+          { "q": "How is an engagement scoped and priced?", "a": "By the decision the data must inform and the confidence it requires. That bar fixes quality, latency and coverage before any pipeline is built, and scope is set against it." },
+          { "q": "Do you operate the pipeline or hand it off?", "a": "Both are possible. The default is hand-off with schema, lineage and documentation so your team owns it. Synther can run it alongside you while the capability is built." }
+        ],
+        "seo": {
+          "description": "Synther's Complex Data Analytics discipline - high-dimensional, multi-source data turned into structured signal through pipelines and models built to be auditable and defensible.",
+          "canonical": "/disciplines/data-analytics"
+        }
+      },
+      "decision-making": {
+        "title": "Data-Driven Decision Making",
+        "summary": "We instrument operations so every strategic call survives contact with reality - evidence, not intuition.",
+        "blurb": "Decisions that survive contact with reality.",
+        "points": ["Decision intelligence", "Scenario & risk modelling", "KPI & feedback loops"],
+        "pageLead": "We instrument operations so every strategic call survives contact with reality - evidence, not intuition.",
+        "spec": [
+          { "label": "Engagement", "value": "Decision study, instrumentation or standing loop" },
+          { "label": "Approach", "value": "Frame, instrument, close the loop" },
+          { "label": "Deliverable", "value": "Decision frame, metrics, feedback loop" },
+          { "label": "Hand-off", "value": "Client team runs the loop; Synther reviews" }
+        ],
+        "overview": [
+          "Most strategic decisions are made on summarized reports that arrived too late and averaged away the signal. The alternative is not more data - it is a closed loop: instrument the operation, surface the variables that actually move the outcome, and feed them back to the people making the call.",
+          "We build decision intelligence into operations: the right metrics measured at the right cadence, scenarios that expose what a choice assumes, and feedback loops that compare the prediction to what happened. Risk is modelled explicitly rather than absorbed into a single number. The result is a decision process that learns - one that gets more honest the more it is used."
+        ],
+        "capabilities": [
+          { "title": "Decision intelligence", "text": "Structure the decision - the alternatives, the variables that move the outcome, the information available - so the choice is made on a frame rather than a feeling.", "points": ["Alternatives structured", "Outcome variables mapped", "Information base explicit"] },
+          { "title": "Scenario & risk modelling", "text": "Model the scenarios a decision implies and the risk each carries. Assumptions are made explicit so they can be challenged before and tested after.", "points": ["Scenarios modelled", "Assumptions made explicit", "Risk quantified per path"] },
+          { "title": "KPI & feedback loops", "text": "Define the metrics that actually precede the outcome, instrument them, and close the loop between prediction and result so the process learns.", "points": ["Leading metrics defined", "Instrumented & measured", "Prediction-to-result loop"] },
+          { "title": "Evidence & audit", "text": "Record what was known, what was assumed and what was decided - so a call can be reviewed against the outcome rather than reconstructed from memory.", "points": ["Known, assumed, decided recorded", "Reviewable against outcome", "Not reconstructed from memory"] }
+        ],
+        "engagement": {
+          "lead": "Decision-making engagements target a specific recurring decision and make it learn.",
+          "steps": [
+            { "title": "Frame the decision", "text": "We fix the decision, its alternatives and the variables that move the outcome. The information base is made explicit, including what is not known." },
+            { "title": "Instrument & model", "text": "Leading metrics are defined and measured; scenarios and risk are modelled. The decision is rehearsed against the model before it is made." },
+            { "title": "Close the loop", "text": "Outcomes are fed back against predictions. The loop runs on a cadence so the decision process improves with every cycle." }
+          ]
+        },
+        "outcomes": [
+          "Decisions made on an explicit frame, not an implicit one.",
+          "Assumptions recorded before and tested after the call.",
+          "A feedback loop that makes the process more honest over time."
+        ],
+        "lineage": [
+          { "name": "Synther", "text": "The single point of synthesis - where every discipline converges into one decision-grade picture." },
+          { "name": "Data-Driven Decision Making", "text": "This discipline. The closed loop that instruments an operation and feeds the outcome back to the call, so decisions learn.", "current": true },
+          { "name": "The connected disciplines", "text": "Systems, Process, Development, Data and Consulting - each feeds the frame a decision rests on." }
+        ],
+        "faq": [
+          { "q": "What does a decision-making engagement include?", "a": "A specific recurring decision framed with its alternatives and variables, leading metrics instrumented, scenarios and risk modelled, and a feedback loop that compares prediction to outcome. The deliverable is a decision process that learns." },
+          { "q": "Isn't this just better dashboards?", "a": "No. Dashboards summarize what happened; this instruments what precedes the outcome and closes the loop back to the people making the call. The point is a process that gets more honest the more it is used, not a report that arrives later." },
+          { "q": "What if the decision is one-off, not recurring?", "a": "The frame and scenario work still apply - assumptions made explicit, risk modelled, the choice rehearsed against the model. The feedback loop is most valuable for recurring decisions, but the discipline fits a single high-stakes call too." },
+          { "q": "How is an engagement scoped and priced?", "a": "By the decision and the cadence the loop must run on. Scope and success criteria are fixed up front; the loop is judged by whether the process improves with each cycle." },
+          { "q": "Do you make the decisions for us?", "a": "No. We build the frame, the instrumentation and the loop. The call stays yours; what changes is that it is made on an explicit frame with assumptions recorded before and tested after." }
+        ],
+        "seo": {
+          "description": "Synther's Data-Driven Decision Making discipline - instrumenting operations so every strategic call survives contact with reality, with feedback loops that make the decision process learn.",
+          "canonical": "/disciplines/decision-making"
+        }
+      },
+      "consulting": {
+        "title": "Consulting",
+        "summary": "Senior engineering and analytics counsel across all six disciplines - embedded with your team or as an independent advisory.",
+        "blurb": "Senior counsel, embedded or independent.",
+        "points": ["Technical due diligence", "Roadmap & capability planning", "Expert review & risk"],
+        "pageLead": "Senior engineering and analytics counsel across all six disciplines - embedded with your team or as an independent advisory.",
+        "spec": [
+          { "label": "Engagement", "value": "Scoped assessment, review or standing advisory" },
+          { "label": "Approach", "value": "Sized to the evidence the answer needs" },
+          { "label": "Deliverable", "value": "Documented judgment with reasoning" },
+          { "label": "Hand-off", "value": "Reasoning transferred to the client team" }
+        ],
+        "overview": [
+          "Not every problem needs a build team. Some need a clear-eyed assessment of where the risk actually sits, a roadmap that sequences the right capabilities, or an independent review a board can rely on. Consulting is the same first-principles discipline applied to a question rather than a deliverable.",
+          "We work embedded with client teams or as a standing advisory, bringing depth across systems engineering, process, development, data and decisions. The output is a judgment the client can act on - a due diligence, a roadmap, a risk register - documented to the standard the context demands. We are explicit about what we would do, what we would not, and why."
+        ],
+        "capabilities": [
+          { "title": "Technical due diligence", "text": "Assess a system, a process or a technology stack against its claims - what works, what is latent, what is risk - and report it in terms a decision can rest on.", "points": ["Claims assessed against evidence", "Latent capability surfaced", "Decision-grade report"] },
+          { "title": "Roadmap & capability planning", "text": "Sequence the capabilities an organization needs to build, in the order that compounds - so each step creates the foundation for the next.", "points": ["Capabilities sequenced", "Compounding order", "Foundation for the next"] },
+          { "title": "Expert review & risk", "text": "Independent review of architectures, designs and analytics for risk and soundness - the second opinion that is not incentivized to approve.", "points": ["Independent second opinion", "Architecture & analytics review", "Not incentivized to approve"] },
+          { "title": "Advisory & embedded counsel", "text": "Standing access to senior engineering and analytics judgment - embedded in a team or on call for the decisions that need a second view.", "points": ["Standing senior access", "Embedded or on call", "Second view when needed"] }
+        ],
+        "engagement": {
+          "lead": "Consulting engagements are scoped to a question and sized to the evidence it needs.",
+          "steps": [
+            { "title": "Scope the question", "text": "We fix what the client needs to know and the standard of evidence the answer requires. The engagement is sized to that, not to a retainer." },
+            { "title": "Assess", "text": "We review the systems, data and people involved - against first principles and against the record. Findings are documented with the reasoning, not just the verdict." },
+            { "title": "Advise & transfer", "text": "We deliver a judgment the client can act on, and transfer the reasoning so the team can apply it to the next question themselves." }
+          ]
+        },
+        "outcomes": [
+          "A documented judgment the client and its board can act on.",
+          "Risks named explicitly, with the reasoning behind each.",
+          "Reasoning transferred, not just conclusions delivered."
+        ],
+        "lineage": [
+          { "name": "Synther", "text": "The single point of synthesis - where every discipline converges into one decision-grade picture." },
+          { "name": "Consulting", "text": "This discipline. The senior, independent judgment that spans all six - a due diligence, a roadmap or a review a board can rely on.", "current": true },
+          { "name": "The connected disciplines", "text": "Systems, Process, Development, Data and Decisions - the depth consulting draws on across every engagement." }
+        ],
+        "faq": [
+          { "q": "What does a consulting engagement include?", "a": "A question scoped to the standard of evidence it needs, an assessment against first principles and the record, and a documented judgment with the reasoning - not just the verdict. The deliverable is a due diligence, a roadmap or a review a board can rely on." },
+          { "q": "When should we choose consulting over a build?", "a": "When the problem needs a judgment rather than a deliverable - an assessment of where the risk sits, a roadmap that sequences the right capabilities, or an independent review. Not every problem needs a build team." },
+          { "q": "Are you truly independent?", "a": "Yes. Expert review is a second opinion that is not incentivized to approve. We are explicit about what we would do, what we would not, and why - documented to the standard the context demands." },
+          { "q": "How is an engagement scoped and priced?", "a": "By the question and the evidence the answer requires. The engagement is sized to that, not to a retainer, and scope is fixed once the standard of evidence is agreed." },
+          { "q": "Can you work embedded with our team?", "a": "Yes. Consulting runs embedded with client teams or as a standing advisory. The reasoning is transferred so the team can apply it to the next question themselves." }
+        ],
+        "seo": {
+          "description": "Synther's Consulting discipline - senior engineering and analytics counsel across all six disciplines, embedded or as an independent advisory, delivering documented judgment a board can rely on.",
+          "canonical": "/disciplines/consulting"
+        }
+      }
+    }
+  },
+  "approach": {
+    "eyebrow": "Approach",
+    "title": "From problem to decision.",
+    "lead": "A conceptual process, not a fixed recipe. Most engagements move through these six stages - though the entry point and the endpoint depend on the problem. Some begin with a paid assessment or discovery workshop, others start on a pilot. Some are handed off to the client's team, while Synther continues to operate the rest. What stays constant is the discipline that connects one stage to the next.",
+    "items": {
+      "01": {
+        "title": "Problem framing",
+        "text": "Every engagement begins by making the problem precise. Requirements are elicited and decomposed, the system boundary and its interfaces defined and the success criteria and binding constraints fixed before any solution is entertained. An ill-posed problem solves nothing."
+      },
+      "02": {
+        "title": "Solution hypothesis",
+        "text": "A candidate architecture is advanced as a hypothesis - an explicit, first-principles concept specific enough to be tested and falsified. Trade studies narrow the design space, treating nothing as assumed that can instead be examined."
+      },
+      "03": {
+        "title": "Minimum viable prototype",
+        "text": "The smallest build that exposes the hypothesis to reality - a reduced-scale prototype or proof of concept, physical or digital, engineered to fail fast and to be informative when it does."
+      },
+      "04": {
+        "title": "Verification & iteration",
+        "text": "The prototype meets real conditions under verification and validation. Measurement closes the loop back into the model and the design converges through iterative refinement - a controlled descent toward what holds up, not a single leap."
+      },
+      "05": {
+        "title": "Qualified solution",
+        "text": "What remains once the iterations settle: a qualified system - machine, software or decision layer - that performs under the conditions it was built for, documented to the standard required to run and maintain it."
+      },
+      "06": {
+        "title": "Knowledge transfer & workforce development",
+        "text": "The work is transferred, not abandoned. Documentation, training and workforce development make the client's team the operator and maintainer of what was built - or Synther runs it alongside them and builds the capability to hand it over."
+      }
+    }
+  },
+  "capabilityPage": {
+    "back": "All disciplines",
+    "breadcrumbHome": "Home",
+    "breadcrumbRoot": "Disciplines",
+    "eyebrow": "Capability",
+    "specEyebrow": "At a glance",
+    "overviewEyebrow": "Overview",
+    "capabilitiesEyebrow": "What this covers",
+    "capabilitiesTitle": "What this discipline covers",
+    "engagementEyebrow": "How we engage",
+    "engagementTitle": "How an engagement runs",
+    "lineageEyebrow": "Where this sits",
+    "lineageTitle": "Where this discipline sits",
+    "outcomesEyebrow": "What you get",
+    "outcomesTitle": "What you take away",
+    "faqEyebrow": "Questions",
+    "faqTitle": "Frequently asked",
+    "discussCta": "Discuss this discipline",
+    "ctaTitle": "Bring this discipline to your decision.",
+    "ctaText": "Tell us about the system, process or machine where {{name}} applies. We reply within two working days.",
+    "relatedTitle": "Other disciplines",
+    "docTitle": "{{name}} · Synther",
+    "notFoundTitle": "Discipline not found",
+    "notFoundBody": "That discipline does not exist. Browse all six from the offerings section.",
+    "notFoundCta": "Back to all disciplines"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Tell us about the system, process or machine you need help with.",
+    "lead": "Send a short description of the problem and the outcome you're after. We reply within two working days.",
+    "name": "Name",
+    "email": "Email",
+    "projectType": "Project type",
+    "projectTypePlaceholder": "Select a discipline…",
+    "message": "Message",
+    "messagePlaceholder": "Briefly describe the problem and the result you need.",
+    "consent": "I agree to be contacted about this enquiry. See the <link>privacy notice</link>.",
+    "note": "No automated processing - your message opens in your mail client.",
+    "submit": "Send enquiry",
+    "directTitle": "Direct",
+    "successTitle": "Your draft is ready.",
+    "successBody": "Your mail client should have opened with the details prefilled. If it didn't, write to <email>{{email}}</email>.",
+    "sendAnother": "Send another",
+    "mailtoSubject": "Project enquiry - {{type}}",
+    "projectTypeGeneral": "General",
+    "mailtoName": "Name",
+    "mailtoEmail": "Email",
+    "mailtoProjectType": "Project type",
+    "mailtoProjectTypeFallback": "-",
+    "direct": {
+      "email": { "label": "Email" },
+      "region": { "label": "Region", "value": "{{location}} · remote-first" },
+      "response": { "label": "Response", "value": "Within 2 working days" }
+    },
+    "projectTypes": {
+      "systems-engineering": "Systems engineering & design",
+      "process-optimization": "Process optimization",
+      "development": "Development & engineering",
+      "data-analytics": "Complex data analytics",
+      "decision-making": "Data-driven decision making",
+      "consulting": "Consulting",
+      "other": "Other"
+    }
+  },
+  "footer": {
+    "blurb": "Transforming disparate systems and data into a singular point of decision.",
+    "cta": "Contact the engineering team",
+    "navTitle": "Navigation",
+    "legalTitle": "Contact & Legal",
+    "imprint": "Imprint & Privacy",
+    "copyright": "© {{year}} {{legalName}}",
+    "tag": "Engineering synthesis.",
+    "build": "SYS-ENG · v1.0"
+  }
+}

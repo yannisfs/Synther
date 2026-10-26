@@ -1,0 +1,18 @@
+name = "riviera-engineering"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "dist"
+
+# D1 binding — the contact form posts here.
+# After running `wrangler d1 create riviera-contacts`, paste the returned
+# database_id below (or set it via `wrangler pages secret put`).
+[[d1_databases]]
+binding = "DB"
+database_name = "riviera-contacts"
+database_id = "f1c27081-5169-468f-b90a-ad55737115bd"
+
+# Vars surfaced to Functions. Override per-environment with `--var` or in
+# the dashboard. RATE_LIMIT_WINDOW_MINUTES / RATE_LIMIT_MAX control the
+# per-IP throttle on POST /api/contact.
+[vars]
+RATE_LIMIT_WINDOW_MINUTES = "10"
+RATE_LIMIT_MAX = "3"

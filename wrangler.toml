@@ -1,0 +1,28 @@
+name = "synther-gmbh"
+compatibility_date = "2025-01-01"
+
+# Static-site build for Cloudflare Pages.
+# `npm run build` outputs to ./dist — deploy with `npx wrangler pages deploy dist`
+# or connect this repo in the Cloudflare dashboard with:
+#   Build command: npm run build
+#   Output dir:    dist
+pages_build_output_dir = "dist"
+
+# D1 binding — contact form submissions + consent receipts.
+# After running `npx wrangler@latest d1 create synther-contacts`, paste the
+# returned database_id below (the placeholder below fails the deploy until
+# it's replaced). The first run of `wrangler d1 migrations apply DB --remote`
+# creates the three tables declared in `migrations/0001_init.sql`.
+[[d1_databases]]
+binding = "DB"
+database_name = "synther-contacts"
+database_id = "c3de6f96-11f8-4f98-9235-ad20d8f694f0"
+
+# Vars surfaced to Functions. Override per-environment with `--var` or in
+# the dashboard. RATE_LIMIT_WINDOW_MINUTES / RATE_LIMIT_MAX control the
+# per-IP throttle on POST /api/contact; CONSENT_RATE_LIMIT_MAX is the much
+# gentler throttle on POST /api/consent (banner can be toggled freely).
+[vars]
+RATE_LIMIT_WINDOW_MINUTES = "10"
+RATE_LIMIT_MAX = "3"
+CONSENT_RATE_LIMIT_MAX = "20"

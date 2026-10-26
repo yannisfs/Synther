@@ -1,0 +1,38 @@
+{
+  "name": "riviera-engineering",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build:vite": "vite build",
+    "prerender": "node scripts/prerender.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "vite build && node scripts/prerender.mjs && node scripts/generate-sitemap.mjs",
+    "preview": "vite preview",
+    "cf:dev": "wrangler pages dev dist --d1=DB --port 8788",
+    "cf:deploy": "npm run build && wrangler pages deploy dist --project-name riviera-engineering",
+    "cf:db:create": "wrangler d1 create riviera-contacts",
+    "cf:db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "cf:db:migrate:remote": "wrangler d1 migrations apply DB --remote"
+  },
+  "dependencies": {
+    "i18next": "^23.16.4",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.1.1",
+    "react-router-dom": "^6.30.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "parse5": "^8.0.1",
+    "playwright-core": "^1.62.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.11",
+    "wrangler": "^3.99.0"
+  }
+}

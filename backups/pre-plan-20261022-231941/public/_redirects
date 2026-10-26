@@ -1,0 +1,9 @@
+# Discipline pages moved from /capabilities/* to /disciplines/* — perm-
+# redirect the old paths so previously indexed links and inbound links
+# land on the current page instead of the SPA fallback.
+/capabilities/*    /disciplines/:splat    301
+
+# Single-page app fallback — any unknown path serves the app shell.
+# This is a static marketing site with hash-anchor navigation, so the
+# fallback is mainly defensive against stray paths / old links.
+/*    /index.html   200

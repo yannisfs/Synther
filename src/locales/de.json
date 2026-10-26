@@ -1,0 +1,204 @@
+{
+  "_comment": "German locale — only the keys that MUST exist in German are present (Impressum + Datenschutzerklärung + cookie banner UI). The rest of the site (home, offerings, contact, etc.) falls back to English via i18next's fallbackLng: 'en'.",
+  "site": {
+    "name": "Synther",
+    "brand": "SYNTHER",
+    "location": "Deutschland",
+    "region": "Frankfurt Rhein-Main",
+    "tagline": "Engineering synthesis.",
+    "shortPitch": "Transforming disparate systems and data into a singular point of decision.",
+    "email": "contact@synther.eu"
+  },
+  "title": {
+    "imprint": "Impressum & Datenschutz · Synther",
+    "cookies": "Cookie-Richtlinie · Synther",
+    "help": "Hilfe · Synther"
+  },
+  "footer": {
+    "cookiePrefs": "Cookie-Einstellungen",
+    "cookiePolicy": "Cookie-Richtlinie"
+  },
+  "cookie": {
+    "title": "Datenschutzhinweis",
+    "body": "Diese Website speichert nur Ihre Cookie-Hinweis-Entscheidung im Browser. Keine Analyse, kein Tracking.",
+    "ok": "OK",
+    "learnMore": "Mehr in unserer Cookie-Richtlinie"
+  },
+  "cookiePage": {
+    "breadcrumbHome": "Start",
+    "breadcrumbCurrent": "Cookie-Richtlinie",
+    "kicker": "Rechtliches",
+    "title": "Cookie-Richtlinie",
+    "lead": "Welche Cookies und ähnliche Technologien diese Website einsetzt, warum und wie Sie Ihre Entscheidung jederzeit ändern können.",
+    "englishEyebrow": "Englisch (Gefälligkeitsübersetzung)",
+    "backCta": "Zurück zur Startseite",
+    "s1": {
+      "head": "1. Was sind Cookies?",
+      "body": "Cookies sind kleine Textdateien, die Ihr Browser auf Ihrem Gerät speichert. Wir nutzen die verwandte Technologie localStorage, die nach dem gleichen Prinzip funktioniert, jedoch auf den Ursprung dieser Website beschränkt ist."
+    },
+    "s2": {
+      "head": "2. Welche Technologien wir einsetzen",
+      "body": "Diese Website verwendet keine Cookies zu Analyse-, Marketing- oder Tracking-Zwecken. Wir setzen ausschließlich localStorage ein, um Ihre Cookie-Entscheidung zu speichern, damit wir Sie nicht bei jedem Seitenaufruf erneut um Ihre Einwilligung bitten. Beim Besuch der Website werden durch unseren Hosting-Anbieter Cloudflare technisch erforderliche Server-Logdaten verarbeitet (IP-Adresse, User-Agent, Zeitstempel, abgerufene URL). Die Rechtsgrundlage dieser notwendigen Verarbeitung ist § 25 Abs. 2 Nr. 2 TDDDG. Zusätzlich speichern wir einen Nachweis Ihrer Entscheidung in unserer Datenbank, wie in Abschnitt 4 der <a href=\"/imprint/\">Datenschutzerklärung</a> beschrieben."
+    },
+    "s3": {
+      "head": "3. Drittanbieter",
+      "body": "Es werden keine Drittanbieter-Cookies gesetzt. Wir setzen insbesondere keine Analyse-Tools wie Google Analytics, Matomo oder Plausible ein und binden keine Werbe- oder Social-Media-Tracker ein."
+    },
+    "s4": {
+      "head": "4. Einwilligung verwalten oder widerrufen",
+      "body": "Sie können Ihre Einwilligung jederzeit ändern oder widerrufen. Öffnen Sie die Cookie-Einstellungen über den Link im Footer oder direkt über das kompakte Banner bei Ihrem ersten Besuch und passen Sie Ihre Auswahl an. Der Widerruf darf nicht schwerer sein als die Einwilligung. Die Rechtsgrundlage der bis zum Widerruf erfolgten Verarbeitung (Art. 7 Abs. 3 DSGVO) bleibt unberührt."
+    },
+    "s5": {
+      "head": "5. Änderungen",
+      "body": "Sollten wir künftig nicht-essenzielle Cookies oder Tracking-Technologien einsetzen, werden wir Sie vorab um Ihre ausdrückliche Einwilligung bitten und diese Cookie-Richtlinie aktualisieren. Die jeweils aktuelle Version steht dauerhaft unter dieser URL bereit."
+    },
+    "currentChoice": {
+      "label": "Aktuelle Einwilligung",
+      "acknowledged": "Bestätigt",
+      "notAcknowledged": "Noch nicht bestätigt",
+      "openSettings": "Einstellungen ändern"
+    },
+    "aside": {
+      "head": "Lokal gespeicherte Entscheidung zurücksetzen",
+      "body": "Diese Funktion ist ein Komfort-Werkzeug: Sie löscht nur den lokalen Datensatz in Ihrem Browser. Das Banner erscheint beim nächsten Seitenaufruf erneut und Sie können eine neue Entscheidung treffen. Die historische Aufzeichnung in unserer Datenbank (Art. 7 Abs. 1 DSGVO) wird nicht gelöscht - sie dient als Nachweis, dass Sie zu einem bestimmten Zeitpunkt eine Entscheidung getroffen haben.",
+      "reset": "Lokale Entscheidung zurücksetzen"
+    },
+    "english": {
+      "kicker": "Cookie Policy",
+      "s1": {
+        "head": "1. What are cookies?",
+        "body": "Cookies are small text files placed on your device by your browser. We use the related localStorage technology, which works the same way but stays scoped to this site's origin."
+      },
+      "s2": {
+        "head": "2. The technologies we use",
+        "body": "This site does not use any cookies for analytics, marketing or tracking. We use localStorage to remember your cookie decision so we don't re-prompt you on every page load. When you visit the site, our hosting provider Cloudflare processes server log data (IP address, user-agent, timestamp, requested URL). The legal basis for this necessary processing is § 25 (2) No. 2 TDDDG. We also keep a record of your decision in our database, as described in section 4 of the <a href=\"/imprint/\">privacy notice</a>."
+      },
+      "s3": {
+        "head": "3. Third parties",
+        "body": "No third-party cookies are set. We do not run Google Analytics, Matomo, Plausible or any similar tool and we do not embed advertising or social-media trackers."
+      },
+      "s4": {
+        "head": "4. Change or withdraw your decision",
+        "body": "You can change or withdraw your decision at any time. Open the cookie preferences from the footer link or the compact banner on your first visit and update your choice. Withdrawal is no harder than consent. The legal basis for processing before withdrawal (Art. 7 (3) GDPR) is unaffected."
+      },
+      "s5": {
+        "head": "5. Future changes",
+        "body": "If we ever introduce non-essential cookies or tracking technologies, we will ask for your explicit consent in advance and update this cookie policy. The current version is always available at this URL."
+      },
+      "currentChoice": {
+        "label": "Current consent",
+        "acknowledged": "Acknowledged",
+        "notAcknowledged": "Not yet acknowledged",
+        "version": "Schema version"
+      },
+      "aside": {
+        "head": "Clear the locally stored decision",
+        "body": "This is a convenience: it only clears the local record in your browser. The banner will re-appear on the next page load so you can make a new decision. The historical record in our database (Art. 7 (1) GDPR) is not deleted - it remains as proof that you made a decision at a specific time.",
+        "reset": "Clear local decision"
+      }
+    }
+  },
+  "help": {
+    "breadcrumbHome": "Start",
+    "breadcrumbCurrent": "Support",
+    "title": "Support, dringende Tickets und 30-Minuten-Beratung.",
+    "lead": "Wenn ein System brennt oder wenn Sie vor einer Entscheidung eine zweite Meinung brauchen - wählen Sie den Weg, der zur Dringlichkeit passt.",
+    "paths": {
+      "urgentLabel": "Läuft etwas schief?",
+      "urgentTitle": "Sev-1-Ticket öffnen",
+      "urgentHint": "Wir melden uns innerhalb von 15 Minuten während der Arbeitszeit.",
+      "consultLabel": "Eine zweite Meinung?",
+      "consultTitle": "30-Minuten-Gespräch anfragen",
+      "consultHint": "Schlagen Sie eine Zeit vor, senden Sie eine kurze Beschreibung, und wir rufen Sie zurück."
+    },
+    "urgent": {
+      "title": "Es brennt gerade.",
+      "lead": "Für Bestandskunden mit einem laufenden System, einem aktiven Rollout oder einer Frist, die sich nicht verschieben lässt. Wir melden uns innerhalb von 15 Minuten während der Arbeitszeit und bestätigen jedes Ticket innerhalb einer Stunde, 24/7.",
+      "openTicket": "Sev-1-Ticket öffnen"
+    },
+    "consult": {
+      "title": "30 Minuten mit einem Ingenieur.",
+      "lead": "Kein Notfall, aber Sie brauchen eine zweite Meinung zu einem Entwurf, einem Prozess oder einem Datenmodell, bevor Sie sich festlegen. Nennen Sie uns einen Zeitpunkt, senden Sie eine kurze Beschreibung und wir rufen Sie zurück."
+    },
+    "guides": {
+      "title": "Antworten zur Selbstbedienung, wenn kein Mensch nötig ist.",
+      "lead": "Arbeitsnotizen, Playbooks und FAQs - das, was wir sonst als einmalige E-Mail verschicken würden.",
+      "browse": "Alle Anleitungen ansehen"
+    },
+    "errorGeneric": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder eine E-Mail an contact@synther.eu schreiben.",
+    "errorRateLimit": "Zu viele Anfragen aus Ihrem Netzwerk. Bitte in ein paar Minuten erneut versuchen.",
+    "errorFixFields": "Bitte die markierten Felder korrigieren.",
+    "errorName": "Bitte Ihren Namen angeben.",
+    "errorEmail": "Bitte eine gültige E-Mail-Adresse angeben.",
+    "errorSituation": "Bitte die Situation beschreiben.",
+    "errorConsent": "Bitte bestätigen, dass wir Sie zu dieser Anfrage kontaktieren dürfen."
+  },
+  "imprint": {
+    "breadcrumbHome": "Start",
+    "breadcrumbCurrent": "Impressum & Datenschutz",
+    "h1": "Impressum und Datenschutzerklärung",
+    "lead": "Die rechtlichen Angaben der Synther GmbH gemäß § 5 DDG sowie die Erklärung zur Verarbeitung personenbezogener Daten gemäß Art. 13 DSGVO.",
+    "backCta": "Zurück zur Startseite",
+    "todoEyebrow": "Vor dem Live-Gang",
+    "todoTitle": "Platzhalter ausfüllen",
+    "todoBody": "Diese Seite enthält Platzhalter, die vor dem ersten Live-Gang ausgefüllt werden müssen. Das deutsche Impressum ist rechtlich verbindlich. Die englische Übersetzung darunter ist eine Gefälligkeitsübersetzung.",
+    "englishEyebrow": "Englisch (Gefälligkeitsübersetzung)",
+    "impressumEyebrow": "Impressum",
+    "impressumHead": "Angaben gemäß § 5 DDG",
+    "impressumLead": "Anbieter und verantwortliche Stelle im Sinne des § 5 DDG sowie des § 18 Abs. 2 MStV:",
+    "privacyEyebrow": "Datenschutzerklärung",
+    "privacyHead": "Datenschutzerklärung",
+    "privacyLead": "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.",
+    "english": {
+      "imprintHead": "Imprint",
+      "imprintLead": "This is an English courtesy translation. The German version above is legally binding.",
+      "privacyHead": "Privacy Notice",
+      "privacyLead": "This is an English courtesy translation. The German version above is legally binding.",
+      "controllerHead": "1. Controller",
+      "controllerBody": "Synther GmbH, contact@synther.eu, postal address: [TODO - replace].",
+      "logsHead": "2. Data we process when you visit this site",
+      "logsBody": "When you visit this site, our hosting provider Cloudflare processes server log data (IP address, browser identifier, timestamp, requested URL). Legal basis: Art. 6 (1) lit. f GDPR (legitimate interest in operating a secure website). Retention: 30 days, then deleted.",
+      "cookiesHead": "3. Cookies and local storage",
+      "cookiesBody": "This site stores only your cookie/consent preference in your browser under the key synther.consent. No analytics cookies are set and no third-party cookies are used. See the cookie policy for the full list of technologies in use, the legal basis under § 25 TDDDG and how to change or withdraw your decision at any time.",
+      "consentHead": "4. Consent receipt (Art. 7 GDPR)",
+      "consentBody": "When you make a choice on the cookie banner, we record your decision, the version of the consent schema, the timestamp, your IP address and your user-agent in our database to comply with the documentation requirement under Art. 7 (1) GDPR. Retention: for the duration of the statutory limitation period (3 years). You can change your choice at any time via 'Cookie preferences' in the footer.",
+      "contactHead": "5. Contact inquiries",
+      "contactBody": "When you contact us through the contact form or by email, we process the data you provide (name, email, optional project type, message) for the purpose of handling your inquiry. Legal basis: Art. 6 (1) lit. b GDPR (pre-contractual measures) and Art. 6 (1) lit. f GDPR. Retention: until your inquiry is fully resolved and any contractual or legal retention periods have expired.",
+      "rightsHead": "6. Your rights as a data subject",
+      "rightsBody": "You have the right of access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), objection (Art. 21) and the right to lodge a complaint with a supervisory authority (Art. 77). To exercise these rights, write to contact@synther.eu.",
+      "complaintHead": "7. Right to lodge a complaint",
+      "complaintBody": "You have the right to lodge a complaint with the data protection supervisory authority competent for our registered seat: The Hessian Commissioner for Data Protection and Freedom of Information (HBDI), Gustav-Stresemann-Ring 1, 65189 Wiesbaden."
+    },
+    "fields": {
+      "provider": "Anbieter (§ 5 DDG)",
+      "representative": "Gesetzlicher Vertreter",
+      "address": "Anschrift",
+      "email": "Kontakt (E-Mail)",
+      "phone": "Kontakt (Telefon)",
+      "register": "Registereintrag",
+      "registerCourt": "Registergericht",
+      "registerNumber": "Registernummer",
+      "vat": "Umsatzsteuer-ID (§ 27a UStG)",
+      "taxNumber": "Steuernummer / Wirtschafts-ID",
+      "mediaLaw": "Verantwortlich i.S.d. § 18 Abs. 2 MStV",
+      "responsibleAuthority": "Zuständige Aufsichtsbehörde"
+    },
+    "privacy": {
+      "controllerHead": "1. Verantwortlicher",
+      "controllerBody": "Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist die Synther GmbH, E-Mail contact@synther.eu, Postanschrift: [TODO - replace].",
+      "logsHead": "2. Erhebung beim Besuch dieser Website",
+      "logsBody": "Beim Besuch dieser Website werden durch unseren Hosting-Anbieter Cloudflare automatisch Informationen in Server-Logfiles verarbeitet (IP-Adresse, Browserkennung, Zeitstempel, abgerufene URL). Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren Webseitenbetrieb). Speicherdauer: 30 Tage, danach Löschung.",
+      "cookiesHead": "3. Cookies und lokale Speicherung",
+      "cookiesBody": "Diese Website speichert in Ihrem Browser ausschließlich Ihre Cookie-/Einwilligungs-Präferenz unter dem Schlüssel synther.consent. Es werden keine Analyse-Cookies gesetzt und keine Drittanbieter-Cookies verwendet. Eine vollständige Übersicht der eingesetzten Technologien, die Rechtsgrundlage nach § 25 TDDDG sowie die Möglichkeit, Ihre Entscheidung jederzeit zu ändern oder zu widerrufen, finden Sie in unserer",
+      "cookiesLink": "Cookie-Richtlinie",
+      "consentHead": "4. Einwilligungs-Nachweis (Art. 7 DSGVO)",
+      "consentBody": "Wenn Sie im Cookie-Banner eine Auswahl treffen, speichern wir Ihre Entscheidung (akzeptiert / abgelehnt), die Version der Einwilligungs-Schemadefinition, den Zeitstempel, Ihre IP-Adresse und Ihren User-Agent in unserer Datenbank, um die Dokumentationspflicht gemäß Art. 7 Abs. 1 DSGVO zu erfüllen. Speicherdauer: bis zum Ablauf der gesetzlichen Verjährungsfrist (3 Jahre). Sie können Ihre Auswahl jederzeit über den Link „Cookie-Einstellungen\" im Footer ändern.",
+      "contactHead": "5. Kontaktaufnahme",
+      "contactBody": "Wenn Sie uns über das Kontaktformular, das Formular für dringende Tickets auf der Hilfe-Seite oder die Anfrage für ein 30-Minuten-Gespräch kontaktieren, verarbeiten wir die von Ihnen angegebenen Daten. Über das Kontaktformular erfassen wir Name, E-Mail, optionalen Projekttyp und Nachricht; über das Formular für dringende Tickets zusätzlich Rückrufnummer und Unternehmen bzw. System; über die Anfrage für ein 30-Minuten-Gespräch zusätzlich Thema und bevorzugte Zeit. Dies dient der Bearbeitung Ihrer Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) sowie Art. 6 Abs. 1 lit. f DSGVO. Speicherdauer: bis zur abschließenden Bearbeitung Ihrer Anfrage und Ablauf etwaiger vertraglicher oder gesetzlicher Aufbewahrungsfristen.",
+      "rightsHead": "6. Ihre Rechte als betroffene Person",
+      "rightsBody": "Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20), Widerspruch (Art. 21) sowie Beschwerde bei einer Aufsichtsbehörde (Art. 77). Zur Ausübung dieser Rechte schreiben Sie an contact@synther.eu.",
+      "complaintHead": "7. Beschwerderecht bei der Aufsichtsbehörde",
+      "complaintBody": "Sie haben das Recht, Beschwerde bei der für unseren Sitz zuständigen Datenschutz-Aufsichtsbehörde einzulegen. Die zuständige Behörde richtet sich nach dem Sitz unseres Unternehmens: Der Hessische Beauftragte für Datenschutz und Informationsfreiheit (HBDI), Gustav-Stresemann-Ring 1, 65189 Wiesbaden."
+    }
+  }
+}

@@ -1,0 +1,235 @@
+:root {
+  /* ---- Light palette: white ground, deep slate-navy ink, logo-blue
+         structure/accent. --white is the primary ink (dark); primary
+         buttons use it as a black ground with white text. ---- */
+  --navy-900: #ffffff;   /* page background */
+  --navy-850: #f3f6fb;   /* alternate section background */
+  --navy-800: #e6ebf3;   /* borders + subtle hover ground */
+  --navy-700: #dde3ec;   /* hairline borders */
+  --navy-600: #c7cfdd;   /* dividers / connector lines */
+  --blue-600: #2d33a7;   /* logo blue — accent + primary-button hover */
+  --blue-500: #3a5cf0;   /* bright accent (structure) */
+
+  --grey-300: #495468;   /* body text */
+  --grey-400: #5c6679;   /* secondary text */
+  --grey-500: #828b9e;   /* tertiary text */
+  --grey-600: #a8b0c0;   /* faint / decorative */
+
+  --white: #0c1b2a;      /* primary ink (headings, strong text, button ground) */
+
+  --blue-glow: rgba(45, 51, 167, 0.28); /* hover halo for the primary button */
+  --on-cta: #ffffff;     /* text/icon color that sits on the primary button */
+
+  /* ---- Type ---- */
+  --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace;
+
+  --maxw: 1160px;
+  --gutter: clamp(36px, 9vw, 148px);
+  --section-pad: clamp(88px, 10vw, 144px);
+  --section-pad-sm: clamp(64px, 8vw, 112px);
+  /* Shared left inset: section heads, offering rows and approach steps all
+     align their left edge to this line, so the page reads as one grid. */
+  --content-inset: clamp(24px, 3vw, 40px);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--navy-900);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.05vw, 17px);
+  line-height: 1.7;
+  letter-spacing: 0.012em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reset block-element defaults so all vertical spacing is explicit and
+   predictable (no collapsed/phantom margins from the UA stylesheet). */
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+::selection {
+  background: var(--blue-600);
+  color: var(--on-cta);
+}
+
+/* ---- Layout helpers ---- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  display: inline-block;
+  margin: 0 0 36px;
+}
+
+/* Section head pattern: a vertical accent bar + indented label/title/lead.
+   Architectural, engineering-drawing motif (BASF-like). Spacing/max-width
+   stay on each section's own head rule. */
+.section-head {
+  border-left: 2px solid var(--blue-600);
+  padding-left: var(--content-inset);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0 0 40px;
+  font-weight: 600;
+  max-width: none;
+}
+
+.section-lead {
+  color: var(--grey-300);
+  max-width: 58ch;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--navy-600) 20%,
+    var(--navy-600) 80%,
+    transparent
+  );
+  border: 0;
+  margin: 0;
+}
+
+/* ---- Buttons / CTA ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 26px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  background: transparent;
+  color: var(--white);
+}
+
+.btn--primary {
+  background: var(--white);
+  color: var(--on-cta);
+  box-shadow: 0 0 0 0 var(--blue-glow);
+}
+
+.btn--primary:hover {
+  background: var(--blue-600);
+  box-shadow: 0 0 32px 0 var(--blue-glow);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  border-color: var(--navy-600);
+  color: var(--grey-300);
+}
+
+.btn--ghost:hover {
+  border-color: var(--blue-600);
+  color: var(--white);
+}
+
+.btn .arrow {
+  transition: transform 0.25s var(--ease);
+}
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ---- Mono label utility ---- */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .offerings__list .offering {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .approach__steps .approach__step {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .nav__toggle svg {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---- Responsive base (mobile-first) ---- */
+@media (min-width: 641px) {
+  .section-title {
+    max-width: 20ch;
+  }
+}

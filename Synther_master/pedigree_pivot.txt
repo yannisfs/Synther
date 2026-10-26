@@ -1,0 +1,8 @@
+1. The "Pedigree" Pivot (Individual vs. Corporate)
+Clients aren't actually hiring a GmbH; they are hiring the brains of the people inside it. If the company is new, but the members are veterans, the language should shift:
+
+Wrong: "Synther has served 12 industry sectors." (This is a corporate claim).
+Right: "Our founding team brings collective experience across 12 industry sectors." (This is a factual claim about the people).
+The "Anonymized Track Record": They can list "Representative Experience" without naming clients (due to NDAs).
+Example: "Our lead systems engineer previously led the architectural redesign of a high-throughput assembly line for a Top-3 German automotive supplier, reducing cycle time by 12%."
+This proves the capability exists without claiming the company did it.

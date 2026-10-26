@@ -1,0 +1,2495 @@
+/* ============================================================
+   Synther GmbH — component styles
+   Design language: sharp, scientific, precise (BASF-like).
+   Palette: dark navy, white, grey, luminous red CTA.
+   ============================================================ */
+
+/* ---------- Navbar ---------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: border-color 0.3s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+/* Frosted background lives on its own layer, NOT on .nav itself. An ancestor
+   with backdrop-filter/filter/transform becomes the containing block for its
+   position:fixed descendants — so putting it on .nav would re-anchor the
+   mobile menu panel (.nav__links, which is fixed) to the 62-70px navbar box
+   instead of the viewport, breaking it when scrolled. Keeping the blur on a
+   sibling layer leaves .nav__links' fixed positioning relative to the viewport. */
+.nav__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  transition: background 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+}
+.nav--scrolled,
+.nav.is-open {
+  border-bottom-color: var(--navy-700);
+}
+.nav--scrolled .nav__bg,
+.nav.is-open .nav__bg {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+/* Compact the header height once the user scrolls — a quieter, "settled"
+   state that reads as a polished product chrome. */
+.nav--scrolled .nav__inner {
+  height: 62px;
+}
+.nav--scrolled .nav__brand-text {
+  font-size: 0.86rem;
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  transition: height 0.3s var(--ease);
+}
+.nav__brand-text {
+  transition: font-size 0.3s var(--ease);
+}
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav__logo {
+  display: block;
+}
+.nav__brand-text {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  font-size: 0.92rem;
+}
+/* Mobile-first: links are a slide-in panel by default; the desktop row
+   is restored at the 980px breakpoint below (tablets keep the panel until
+   there is enough horizontal room for the full row + CTA). */
+.nav__links {
+  display: flex;
+  position: fixed;
+  inset: 62px 0 0 0;
+  /* Frosted glass matching the navbar chrome (see .nav__bg). backdrop-filter
+     on the panel itself is safe: .nav__links has no fixed descendants, and
+     its own containing block is still the viewport because no ancestor
+     (.nav__inner / .nav) carries a filter/transform/backdrop-filter. */
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 40px var(--gutter);
+  gap: 24px;
+  transform: translateX(100%);
+  transition: transform 0.35s var(--ease);
+}
+.nav__links.is-open {
+  transform: translateX(0);
+}
+.nav__links > a:not(.nav__cta) {
+  font-size: 0.9rem;
+  color: var(--grey-300);
+  letter-spacing: 0.02em;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s var(--ease);
+}
+.nav__links > a:not(.nav__cta)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background: var(--blue-600);
+  transition: width 0.25s var(--ease);
+}
+.nav__links > a:not(.nav__cta):hover {
+  color: var(--white);
+}
+.nav__links > a:not(.nav__cta):hover::after {
+  width: 100%;
+}
+.nav__cta {
+  padding: 10px 20px;
+  font-size: 0.74rem;
+}
+/* Mobile menu toggle: a gear (cog) icon that rotates 180° when the menu
+   opens — an engineering cue, matching the reference site. The gear turns
+   logo-blue in its engaged (open) state. */
+.nav__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--white);
+  transition: color 0.25s var(--ease);
+}
+.nav__toggle svg {
+  transition: transform 0.5s var(--ease);
+  display: block;
+}
+.nav__toggle:hover {
+  color: var(--blue-600);
+}
+.nav__toggle.is-open {
+  color: var(--blue-600);
+}
+.nav__toggle.is-open svg {
+  transform: rotate(180deg);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(
+      120% 80% at 50% 0%,
+      var(--navy-850) 0%,
+      var(--navy-900) 70%
+    ),
+    var(--navy-900);
+}
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.hero-canvas--fallback {
+  background: radial-gradient(
+    80% 60% at 60% 40%,
+    rgba(58, 92, 240, 0.12),
+    transparent 60%
+  );
+}
+.hero-canvas canvas {
+  display: block;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Soft white wash behind the left-aligned text so dark ink stays crisp
+   over the converging particles. */
+.hero-overlay--vignette {
+  background: radial-gradient(
+    85% 120% at 30% 50%,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+}
+/* Blend the hero into the page top and bottom. */
+.hero-overlay--gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    transparent 22%,
+    transparent 62%,
+    var(--navy-900) 100%
+  );
+}
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding-top: 135px;
+  padding-bottom: 132px;
+  max-width: 900px;
+}
+
+.hero__title {
+  font-size: clamp(2.8rem, 8vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  /* Tighter gap to the subheading on phones; restored on tablet+ below. */
+  margin: 0 0 24px;
+}
+@media (min-width: 761px) {
+  .hero__title {
+    margin-bottom: 52px;
+  }
+}
+.hero__accent {
+  color: var(--blue-600);
+  position: relative;
+}
+.hero__lead {
+  font-size: clamp(1.08rem, 2vw, 1.45rem);
+  color: var(--grey-300);
+  max-width: 52ch;
+  line-height: 1.55;
+  margin: 0 0 60px;
+}
+@media (min-width: 761px) {
+  .hero__lead {
+    margin-bottom: 72px;
+  }
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 0;
+}
+.hero__scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  color: var(--grey-500);
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(var(--grey-500), transparent);
+  animation: scrollPulse 2.4s var(--ease) infinite;
+}
+@keyframes scrollPulse {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- Stats band ---------- */
+.stats {
+  background: var(--navy-850);
+  border-top: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+}
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.stats__cell {
+  padding: clamp(56px, 7vw, 96px) clamp(28px, 3vw, 48px);
+  border-left: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+}
+.stats__cell:nth-child(odd) {
+  border-left: 0;
+}
+.stats__cell:nth-child(n + 3) {
+  border-bottom: 0;
+}
+.stats__value {
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  line-height: 1;
+}
+.stats__label {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: var(--grey-400);
+  line-height: 1.5;
+  max-width: 22ch;
+}
+
+/* ---------- About ---------- */
+.about {
+  background: var(--navy-850);
+  border-top: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+  padding-block: clamp(36px, 4vw, 56px);
+}
+.about .eyebrow {
+  margin-bottom: 18px;
+}
+.about .section-title {
+  margin-bottom: 0;
+}
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+}
+/* On mobile the body sits below the inset head — align its left edge. */
+.about__body {
+  padding-left: var(--content-inset);
+}
+.about__principles {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about__principles li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--grey-300);
+  font-size: 0.98rem;
+}
+.about__principles li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 14px;
+  height: 1px;
+  background: var(--blue-600);
+}
+.about__detail {
+  color: var(--grey-400);
+  margin-top: 18px;
+}
+
+/* ---------- Offerings ---------- */
+.offerings {
+  background: var(--navy-850);
+  border-top: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+}
+.offerings__head {
+  max-width: 680px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+/* Editorial discipline rows: big index | title+summary+tags | discuss link.
+   Reads as an engineering datasheet rather than a card grid. Hairline rules
+   separate rows; a blue rail and index color mark the hovered discipline. */
+.offerings__list {
+  border-top: 1px solid var(--navy-700);
+}
+.offering {
+  --reveal-delay: 0ms;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: clamp(28px, 4vw, 40px) var(--content-inset);
+  border-bottom: 1px solid var(--navy-700);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease) var(--reveal-delay),
+    transform 0.5s var(--ease) var(--reveal-delay),
+    background 0.3s var(--ease);
+}
+/* One observer on the list flips `is-visible`; rows cascade in together. */
+.offerings__list.is-visible .offering {
+  opacity: 1;
+  transform: none;
+}
+.offerings__list .offering:nth-child(2) { --reveal-delay: 60ms; }
+.offerings__list .offering:nth-child(3) { --reveal-delay: 120ms; }
+.offerings__list .offering:nth-child(4) { --reveal-delay: 180ms; }
+.offerings__list .offering:nth-child(5) { --reveal-delay: 240ms; }
+.offerings__list .offering:nth-child(6) { --reveal-delay: 300ms; }
+.offering::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.3s var(--ease);
+}
+.offering:hover {
+  background: var(--navy-900);
+}
+.offering:hover::before {
+  background: var(--blue-600);
+}
+/* Offering rows are parallel disciplines (no ordinal index) — the hover rail
+   and row hairlines carry the structure. Titles align to the shared inset. */
+.offering__main {
+  display: flex;
+  flex-direction: column;
+}
+.offering__title {
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Discipline glyph beside each home-page row title — echoes the inline-SVG
+   hero of the discipline page it links to, in the same accent blue as the
+   vertical rails. */
+.offering__icon {
+  color: var(--blue-600);
+  flex: none;
+  transition: color 0.25s var(--ease);
+}
+.offering:hover .offering__icon {
+  color: var(--blue-500);
+}
+.offering__summary {
+  color: var(--grey-300);
+  font-size: 0.97rem;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 62ch;
+}
+.offering__tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.offering__tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: var(--grey-400);
+  padding: 5px 10px;
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.offering:hover .offering__tag {
+  border-color: var(--navy-600);
+  color: var(--grey-300);
+}
+.offering__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+  transition: color 0.25s var(--ease);
+  align-self: start;
+}
+.offering__link .arrow {
+  transition: transform 0.25s var(--ease);
+}
+.offering__link:hover {
+  color: var(--blue-500);
+}
+.offering__link:hover .arrow {
+  transform: translateX(4px);
+}
+/* Explore (secondary, -> discipline page) | Discuss (primary, -> #contact).
+   Inline at every width: "explore | discuss ->" with a hairline divider. */
+.offering__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(10px, 1.5vw, 18px);
+}
+/* Hairline between the two options. */
+.offering__actions-sep {
+  display: block;
+  width: 1px;
+  height: 15px;
+  background: var(--navy-600);
+}
+/* Secondary "Explore" link — same accent blue as the vertical rails. */
+.offering__link--more {
+  color: var(--blue-600);
+}
+.offering__link--more:hover {
+  color: var(--blue-500);
+}
+
+/* ---------- Approach ---------- */
+.approach__head {
+  max-width: 680px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.approach__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+/* Grouped reveal: one observer on the <ol>, steps cascade in together. */
+.approach__step {
+  --reveal-delay: 0ms;
+  position: relative;
+  padding: 0;
+  padding-left: var(--content-inset);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease) var(--reveal-delay),
+    transform 0.5s var(--ease) var(--reveal-delay);
+}
+.approach__steps.is-visible .approach__step {
+  opacity: 1;
+  transform: none;
+}
+.approach__steps .approach__step:nth-child(2) { --reveal-delay: 60ms; }
+.approach__steps .approach__step:nth-child(3) { --reveal-delay: 120ms; }
+.approach__steps .approach__step:nth-child(4) { --reveal-delay: 180ms; }
+.approach__steps .approach__step:nth-child(5) { --reveal-delay: 240ms; }
+.approach__steps .approach__step:nth-child(6) { --reveal-delay: 300ms; }
+/* Vertical connector dividers appear only at the desktop breakpoint, between
+   columns (every 3rd child is a row-end and gets no divider). */
+.approach__step::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 0;
+  width: 1px;
+  height: calc(100% - 12px);
+  background: var(--navy-600);
+  display: none;
+}
+.approach__step-num {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--grey-500);
+}
+.approach__step-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.approach__step-text {
+  color: var(--grey-400);
+  font-size: 0.93rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ---------- Capabilities / cases ---------- */
+.cases__head {
+  max-width: 660px;
+  margin-bottom: clamp(88px, 11vw, 152px);
+}
+.cases__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.case {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: clamp(64px, 8vw, 116px) 0;
+  border-top: 1px solid var(--navy-800);
+  transition: background 0.3s var(--ease);
+}
+.case:last-child {
+  border-bottom: 1px solid var(--navy-800);
+}
+.case__index {
+  color: var(--grey-500);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+}
+.case__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 52ch;
+}
+.case__sector {
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+}
+.case__title {
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+.case__desc {
+  color: var(--grey-400);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.case__metric {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 8px;
+}
+.case__metric-value {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.case__metric-label {
+  color: var(--grey-500);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.case__chart {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+/* Technical-readout frame with L-shaped corner brackets. */
+.chart-frame {
+  position: relative;
+  padding: 16px;
+}
+.corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+.corner--tl { top: 0; left: 0; border-top: 1px solid var(--grey-600); border-left: 1px solid var(--grey-600); }
+.corner--tr { top: 0; right: 0; border-top: 1px solid var(--grey-600); border-right: 1px solid var(--grey-600); }
+.corner--bl { bottom: 0; left: 0; border-bottom: 1px solid var(--grey-600); border-left: 1px solid var(--grey-600); }
+.corner--br { bottom: 0; right: 0; border-bottom: 1px solid var(--grey-600); border-right: 1px solid var(--grey-600); }
+.chart {
+  width: clamp(140px, 16vw, 240px);
+  height: auto;
+  display: block;
+}
+
+/* ---------- Contact ---------- */
+.contact {
+  background: var(--navy-850);
+  border-top: 1px solid var(--navy-700);
+  text-align: left;
+}
+.contact__title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 0 40px;
+}
+.contact__lead {
+  color: var(--grey-300);
+  font-size: 1.1rem;
+  margin: 0 0 0;
+  max-width: 50ch;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 3px solid var(--blue-600);
+  padding-top: clamp(96px, 11vw, 152px);
+  padding-bottom: 40px;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  padding-bottom: clamp(64px, 8vw, 96px);
+  border-bottom: 1px solid var(--navy-800);
+}
+.footer__brandcol {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 40ch;
+}
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.22em;
+  font-size: 0.92rem;
+}
+.footer__blurb {
+  color: var(--grey-400);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.footer__btn {
+  align-self: flex-start;
+}
+.footer__col-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-300);
+  margin: 0 0 28px;
+}
+.footer__col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer__col a,
+.footer__col li {
+  color: var(--grey-400);
+  font-size: 0.9rem;
+  transition: color 0.2s var(--ease);
+}
+.footer__col a:hover {
+  color: var(--white);
+}
+.footer__imprint {
+  text-decoration: underline;
+  text-decoration-color: var(--navy-600);
+  text-underline-offset: 4px;
+}
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 28px;
+  color: var(--grey-500);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+}
+.footer__tag {
+  display: none;
+}
+
+/* ============================================================
+   Responsive — mobile-first.
+   Base rules above target the smallest screens; each breakpoint below
+   progressively restores the wider layout.
+   ============================================================ */
+
+/* ≥521px — small tablets: two-column secondary grids, show scroll cue. */
+@media (min-width: 521px) {
+  .approach__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 56px clamp(28px, 5vw, 56px);
+  }
+  .hero__scroll {
+    display: flex;
+  }
+
+  .hero__meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: clamp(32px, 5vw, 72px);
+  }
+  .hero__meta-cell {
+    flex: 0 0 auto;
+  }
+
+  .contact__row {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .contact__submit-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* ≥761px — tablets: two-column hero-critical grids, four-column stats,
+   multi-column footer. Nav stays as the slide-in panel until there is
+   enough horizontal room for the full row (see 980px block below). */
+@media (min-width: 761px) {
+  .about__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 5vw, 80px);
+  }
+  /* Two-column: body is its own column, no shared inset needed. */
+  .about__body {
+    padding-left: 0;
+  }
+
+  /* Discipline row: index rail | content | right-aligned discuss link. */
+  .offering {
+    grid-template-columns: 1fr auto;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+    padding-block: clamp(36px, 4vw, 52px);
+  }
+  .offering__link {
+    align-self: center;
+  }
+
+  .stats__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stats__cell {
+    border-bottom: 0;
+  }
+  .stats__cell:nth-child(odd) {
+    border-left: 1px solid var(--navy-700);
+  }
+  .stats__cell:first-child {
+    border-left: 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: clamp(56px, 7vw, 112px);
+  }
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact__grid {
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(48px, 6vw, 96px);
+    align-items: start;
+  }
+}
+
+/* ≥961px — desktop: three-column approach with connector dividers,
+   three-column case rows with the chart on the right. */
+@media (min-width: 961px) {
+  .approach__steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px 0;
+  }
+  .approach__step {
+    padding: 0 var(--content-inset);
+  }
+  /* Dividers between columns only; every 3rd child ends a row. */
+  .approach__step:not(:nth-child(3n))::after {
+    display: block;
+  }
+
+  .case {
+    grid-template-columns: 60px 1fr auto;
+    gap: clamp(40px, 6vw, 96px);
+  }
+  .case__chart {
+    grid-column: auto;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+}
+
+/* ≥980px — desktop nav row. Held back until this width so the brand,
+   four section links and the CTA all have room to breathe (at 761px the
+   9vw gutters leave too little horizontal space and the row squashes). */
+@media (min-width: 980px) {
+  .nav__links {
+    position: static;
+    inset: auto;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    gap: clamp(32px, 2.8vw, 52px);
+    transform: none;
+  }
+  /* A little extra room before the CTA so the action reads as its own
+     group, not the last item in the list. */
+  .nav__cta {
+    margin-left: clamp(20px, 1.6vw, 32px);
+  }
+  .nav__toggle {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Additions ported from the Riviera reference — brand stripe, hero
+   grid + meta strip, vision quote band, offering top-bar, contact
+   form + direct sidebar. All CSS/SVG only — no images, no backend.
+   ============================================================ */
+
+/* ---------- Hero: engineering graph-paper + meta strip ---------- */
+/* The graph-paper grid is currently disabled. Both this rule and the
+   <div className="hero-grid" /> in Hero.jsx are removed/commented; restore
+   both together to bring it back. */
+/*
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+      rgba(12, 27, 42, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(12, 27, 42, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(
+    82% 72% at 68% 38%,
+    #000 28%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    82% 72% at 68% 38%,
+    #000 28%,
+    transparent 78%
+  );
+}
+*/
+.hero__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 56px 0 0;
+  padding-top: 36px;
+  border-top: 1px solid var(--navy-700);
+}
+@media (min-width: 761px) {
+  .hero__meta {
+    padding-top: 36px;
+  }
+}
+.hero__meta-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero__meta-label {
+  font-size: 0.64rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+}
+.hero__meta-value {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--white);
+  margin: 0;
+}
+
+/* ---------- Vision quote band ---------- */
+.quote {
+  background: var(--navy-900);
+  border-top: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+}
+.quote__inner {
+  position: relative;
+  text-align: center;
+  padding-block: clamp(96px, 12vw, 160px);
+  max-width: 920px;
+  margin: 0 auto;
+}
+.quote__bars {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3px;
+  height: 28px;
+}
+.quote__bars span {
+  width: 3px;
+  height: 100%;
+  display: block;
+}
+.quote__text {
+  margin: 56px 0 0;
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+.quote__attribution {
+  margin: 40px 0 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+}
+
+/* ---------- Contact: form + direct sidebar ---------- */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  margin-top: clamp(56px, 7vw, 88px);
+}
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.contact__label {
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+}
+.contact__input {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--navy-600);
+  background: transparent;
+  padding: 10px 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--white);
+  transition: border-color 0.25s var(--ease);
+  outline: none;
+  border-radius: 0;
+}
+.contact__input::placeholder {
+  color: var(--grey-500);
+}
+.contact__input:focus {
+  border-color: var(--blue-600);
+}
+.contact__select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23828b9e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 28px;
+}
+.contact__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.contact__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--grey-400);
+  cursor: pointer;
+}
+.contact__consent input {
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--blue-600);
+}
+.contact__consent-link {
+  color: var(--blue-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contact__submit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+  border-top: 1px solid var(--navy-800);
+}
+.contact__note {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  max-width: none;
+  line-height: 1.6;
+}
+.contact__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+.contact__success {
+  border: 1px solid var(--navy-700);
+  background: var(--navy-900);
+  padding: clamp(32px, 4vw, 56px);
+}
+.contact__success-icon {
+  color: var(--blue-600);
+  margin-bottom: 24px;
+}
+.contact__success-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.contact__success-body {
+  color: var(--grey-300);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+.contact__success-body a {
+  color: var(--blue-600);
+}
+.contact__again {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--blue-600);
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-300);
+  cursor: pointer;
+  transition: color 0.25s var(--ease);
+}
+.contact__again:hover {
+  color: var(--white);
+}
+.contact__direct {
+  background: var(--navy-900);
+  border: 1px solid var(--navy-700);
+  padding: clamp(28px, 3vw, 40px);
+  align-self: start;
+}
+.contact__direct-title {
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin: 0 0 32px;
+}
+.contact__direct-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.contact__direct-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.contact__direct-icon {
+  color: var(--blue-600);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.contact__direct-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-bottom: 4px;
+}
+.contact__direct-value {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--white);
+  transition: color 0.2s var(--ease);
+}
+a.contact__direct-value:hover {
+  color: var(--blue-600);
+}
+
+/* ---------- Footer bottom brand mark: three small colored squares ---------- */
+.footer__stripe {
+  display: inline-flex;
+  gap: 3px;
+  align-self: center;
+}
+.footer__stripe span {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+/* ============================================================
+   Discipline page (/disciplines/:id)
+   Same tokens and section rhythm as the home page. A page-level
+   accent bar in the hero echoes the section-head motif.
+   ============================================================ */
+/* Hero — a dark panel with a data-driven inline-SVG schematic standing in
+   for a stock photo (no raster images), a left-to-right gradient overlay for
+   readability, and the eyebrow / title / lead / spec strip on top. */
+.capability__hero {
+  position: relative;
+  background: var(--white);
+  color: #ffffff;
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.capability__hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  color: var(--blue-500);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.capability__hero-bg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Left-to-right scrim: opaque ink on the left (where the text sits) fading
+   to translucent on the right so the schematic emerges. */
+.capability__hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    var(--white) 28%,
+    rgba(12, 27, 42, 0.82) 60%,
+    rgba(12, 27, 42, 0.4) 100%
+  );
+}
+.capability__hero-content {
+  position: relative;
+  z-index: 2;
+}
+/* Breadcrumb wayfinding — sits at the very top, clears the fixed navbar. */
+.capability__crumb {
+  padding-top: clamp(96px, 11vw, 128px);
+  padding-bottom: 24px;
+}
+.capability__crumb ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--grey-500);
+}
+.capability__crumb a {
+  color: var(--grey-500);
+  transition: color 0.2s var(--ease);
+}
+.capability__crumb a:hover {
+  color: var(--blue-600);
+}
+.capability__crumb li[aria-current='page'] {
+  color: var(--white);
+}
+.capability__hero .eyebrow {
+  color: var(--blue-500);
+  margin-bottom: 24px;
+}
+.capability__eyebrow-icon {
+  vertical-align: -2px;
+  margin-right: 10px;
+  color: var(--blue-500);
+}
+.capability__hero-head {
+  border-left: 2px solid var(--blue-500);
+  padding-left: var(--content-inset);
+  max-width: 760px;
+}
+.capability__title {
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 0 28px;
+  color: #ffffff;
+}
+.capability__lead {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* Spec-sheet strip under the hero — qualitative key/value, no metrics. */
+.capability__spec {
+  margin: clamp(36px, 5vw, 56px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 28px;
+  max-width: none;
+}
+.capability__spec-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.capability__spec-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.capability__spec-value {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+/* Shared block padding for the body sections. */
+.capability__overview,
+.capability__caps,
+.capability__engagement,
+.capability__lineage,
+.capability__outcomes,
+.capability__faq {
+  border-bottom: 1px solid var(--navy-700);
+}
+/* Alternating bands give the long page chapter breaks. */
+.capability__caps,
+.capability__lineage,
+.capability__outcomes {
+  background: var(--navy-850);
+}
+.capability__block,
+.capability__block-head {
+  border-left: 2px solid var(--blue-600);
+  padding-left: var(--content-inset);
+  max-width: 760px;
+}
+.capability__block-head {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.capability__h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 0;
+}
+.capability__body {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: var(--grey-300);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+.capability__body p {
+  margin: 0;
+}
+
+/* Capability breakdown grid — datasheet cells, hairline borders. */
+.capability__cap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--navy-700);
+}
+.capability__cap {
+  padding: clamp(28px, 3.5vw, 40px) var(--content-inset);
+  border-bottom: 1px solid var(--navy-700);
+  position: relative;
+}
+.capability__cap-index {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--blue-600);
+  margin-bottom: 16px;
+}
+.capability__cap-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+.capability__cap-text {
+  color: var(--grey-400);
+  font-size: 0.97rem;
+  line-height: 1.65;
+  margin: 0 0 18px;
+  max-width: 60ch;
+}
+.capability__cap-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.capability__cap-points li {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--grey-400);
+  padding: 5px 10px;
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+}
+
+/* Engagement steps — numbered, with a vertical connector feel. */
+.capability__eng-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 4vw, 48px);
+}
+.capability__eng-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  padding-left: var(--content-inset);
+  position: relative;
+}
+.capability__eng-num {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--grey-500);
+  letter-spacing: 0.04em;
+  padding-top: 2px;
+}
+.capability__eng-step-title {
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+.capability__eng-step-text {
+  color: var(--grey-400);
+  font-size: 0.97rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 60ch;
+}
+.capability__eng-lead {
+  margin-top: 28px;
+}
+
+/* Outcomes — checked hairline list. */
+.capability__outcome-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.capability__outcome {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding-left: var(--content-inset);
+  color: var(--grey-300);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.capability__outcome-mark {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--blue-600);
+  background: var(--blue-glow);
+  margin-top: 7px;
+}
+
+/* Lineage — where this discipline sits in the synthesis model. */
+.capability__lineage-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.capability__lineage-node {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 20px;
+  padding: 24px var(--content-inset);
+  border-bottom: 1px solid var(--navy-700);
+}
+.capability__lineage-node:first-child {
+  border-top: 1px solid var(--navy-700);
+}
+.capability__lineage-rank {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--grey-500);
+  padding-top: 4px;
+}
+.capability__lineage-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+  color: var(--grey-300);
+}
+.capability__lineage-text {
+  color: var(--grey-400);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 60ch;
+}
+/* The current discipline is highlighted with a left rail. */
+.capability__lineage-node.is-current {
+  position: relative;
+  background: var(--navy-900);
+}
+.capability__lineage-node.is-current::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--blue-600);
+}
+.capability__lineage-node.is-current .capability__lineage-name {
+  color: var(--white);
+}
+
+/* FAQ — native <details>, no JS. */
+.capability__faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--navy-700);
+}
+.capability__faq-item {
+  border-bottom: 1px solid var(--navy-700);
+}
+.capability__faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px var(--content-inset);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  list-style: none;
+  transition: color 0.2s var(--ease);
+}
+.capability__faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.capability__faq-item summary:hover {
+  color: var(--blue-600);
+}
+.capability__faq-mark {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--grey-500);
+  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+.capability__faq-item[open] .capability__faq-mark {
+  transform: rotate(45deg);
+  color: var(--blue-600);
+}
+.capability__faq-a {
+  padding: 0 var(--content-inset) 26px;
+  color: var(--grey-400);
+  font-size: 0.97rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 68ch;
+}
+
+/* CTA + related disciplines band. */
+.capability__cta {
+  padding-block: var(--section-pad);
+  background: var(--navy-900);
+}
+.capability__cta-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: start;
+}
+.capability__cta-title {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 0 0 20px;
+  max-width: 22ch;
+}
+.capability__cta-text {
+  color: var(--grey-300);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 0 0 32px;
+  max-width: 52ch;
+}
+/* Related disciplines sit below the CTA as a full-width block (not a tall
+   narrow aside), so the short CTA copy isn't left with dead space under it. */
+.capability__related {
+  border-top: 1px solid var(--navy-700);
+  padding-top: clamp(32px, 4vw, 48px);
+}
+.capability__related-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  margin: 0 0 24px;
+}
+.capability__related-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--navy-700);
+}
+/* Related-discipline cells — same language as the page's other cells:
+   hairline border (no rounded corners), a numbered mono index in the accent
+   blue, content inset on the left, and the navy-850 + blue-rail hover used
+   by the offering rows. */
+.capability__related-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: clamp(18px, 2.5vw, 26px) var(--content-inset);
+  border-bottom: 1px solid var(--navy-700);
+  position: relative;
+  color: var(--grey-300);
+  transition: background 0.25s var(--ease);
+}
+.capability__related-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.25s var(--ease);
+}
+.capability__related-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.capability__related-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.25;
+}
+.capability__related-blurb {
+  font-size: 0.82rem;
+  color: var(--grey-500);
+  line-height: 1.4;
+}
+.capability__related-card .arrow {
+  color: var(--blue-600);
+  font-size: 0.95rem;
+  transition: transform 0.25s var(--ease);
+}
+.capability__related-card:hover {
+  background: var(--navy-850);
+}
+.capability__related-card:hover::before {
+  background: var(--blue-600);
+}
+.capability__related-card:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* NotFound state */
+.capability--notfound .capability__title {
+  margin-bottom: 24px;
+}
+.capability--notfound .capability__lead {
+  margin-bottom: 36px;
+}
+
+/* ---------- Capability page responsive ---------- */
+@media (min-width: 521px) {
+  .capability__spec {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 40px;
+  }
+}
+/* On narrow screens the schematic sits behind the whole text column, so
+   push the scrim further and dim the visual to keep the lead legible. */
+@media (max-width: 760px) {
+  .capability__hero-bg {
+    opacity: 0.38;
+  }
+  .capability__hero-overlay {
+    background: linear-gradient(
+      100deg,
+      var(--white) 52%,
+      rgba(12, 27, 42, 0.88) 80%,
+      rgba(12, 27, 42, 0.6) 100%
+    );
+  }
+}
+@media (min-width: 761px) {
+  .capability__cap-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* Re-instate vertical dividers between the two columns. */
+  .capability__cap:nth-child(odd) {
+    border-right: 1px solid var(--navy-700);
+  }
+}
+@media (min-width: 961px) {
+  .capability__eng-steps {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .capability__spec {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 40px;
+  }
+}
+
+/* ============================================================
+   Cookie banner & imprint-specific styles
+   ============================================================ */
+
+/* Honeypot field on the contact form — visually hidden, accessible to bots. */
+.contact__hp {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Inline error message under the contact form. */
+.contact__error {
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  border: 1px solid var(--blue-600);
+  background: rgba(45, 51, 167, 0.06);
+  color: var(--white);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+/* Per-field validation states. The form has noValidate, so we own the
+   visual feedback. The invalid border re-uses the brand blue rather than
+   a warm red — the palette is single-tone navy/blue on light, and a red
+   border would look like a system error rather than a brand cue. The
+   field-error caption sits in the existing mono/grey treatment so it
+   reads as a label, not a popup. */
+.contact__input--invalid,
+.contact__input--invalid:focus {
+  border-color: var(--blue-600);
+  background: rgba(45, 51, 167, 0.04);
+}
+.contact__field-error {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--grey-400);
+  line-height: 1.5;
+}
+.contact__consent--invalid {
+  outline: 1px solid var(--blue-600);
+  outline-offset: 4px;
+  background: rgba(45, 51, 167, 0.04);
+}
+
+/* Footer "Cookie preferences" button — same visual treatment as the
+   surrounding anchor links in the legal column. */
+.footer__cookie-prefs {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: inherit;
+}
+.footer__cookie-prefs:hover {
+  color: var(--blue-500);
+}
+
+/* Compact cookie banner — fixed bottom strip on every page where the user
+   has not yet made a choice.
+
+   Layout:
+   - Mobile (<800px): stack of three rows — title (+ X on the right),
+     body (with inline learn-more link), actions (Reject | Accept).
+   - Desktop (≥800px): single horizontal bar split into four columns —
+     [title] [body + link] [X] [Reject | Accept]. The X lives in its own
+     column between text and actions, so it never overlaps the title and
+     stays vertically aligned with the action buttons. */
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: var(--white);
+  border-top: 1px solid var(--navy-700);
+  box-shadow: 0 -8px 28px rgba(12, 27, 42, 0.08);
+  padding: 28px 0;
+}
+.cookie-banner__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+}
+/* Title row. The head sits flush above the body; the inner flex gap
+   (24px mobile / 32px desktop) provides the vertical air between
+   the title and the body. No hairline here — the banner has no
+   internal dividers. */
+.cookie-banner__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.cookie-banner__title {
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--navy-900);  /* true white — reads on the dark banner */
+  margin: 0;
+  line-height: 1.2;
+}
+.cookie-banner__body {
+  margin: 0;
+  color: var(--grey-500);  /* lighter grey — reads on the dark banner */
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 64ch;
+}
+.cookie-banner__body p {
+  margin: 0;
+}
+.cookie-banner__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cookie-banner__actions .btn {
+  flex: 1 1 0;
+  min-width: 140px;
+  justify-content: center;
+}
+.cookie-banner__btn.btn--ghost {
+  border-color: var(--navy-700);
+  color: var(--navy-900);  /* white text + light border on the dark banner */
+}
+.cookie-banner__btn.btn--ghost:hover {
+  border-color: var(--blue-500);
+  color: var(--blue-500);
+}
+.cookie-banner__learnmore--inline {
+  display: inline;
+  /* Keep the border-bottom for hover affordance, but use a tighter
+     underline (1px) so the inline link reads as a link inside the
+     sentence without distracting from the body text. */
+  border-bottom-width: 1px;
+  padding-bottom: 1px;
+}
+@media (min-width: 800px) {
+  .cookie-banner__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+  /* On desktop the head sits in its own column next to body and actions. */
+  .cookie-banner__head {
+    flex: 0 0 auto;
+  }
+  .cookie-banner__body {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+  }
+  .cookie-banner__actions {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .cookie-banner__actions .btn {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+}
+
+/* Preferences dialog (modal). */
+.cookie-banner__prefs {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(12, 27, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.cookie-banner__prefs-card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--white);
+  border-radius: 4px;
+  padding: 28px 28px 0;
+  box-shadow: 0 24px 80px rgba(12, 27, 42, 0.25);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.cookie-banner__prefs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 0 20px;
+  border-bottom: 1px solid var(--navy-700);
+  margin-bottom: 0;
+}
+.cookie-banner__prefs-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--navy-900);  /* true white — reads on the dark card */
+}
+.cookie-banner__prefs-close {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 6px;
+  margin: -6px;
+  color: var(--grey-500);  /* lighter grey — reads on the dark card */
+  line-height: 0;
+}
+.cookie-banner__prefs-close:hover {
+  color: var(--navy-900);
+}
+.cookie-banner__categories {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cookie-banner__category {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--navy-700);
+  align-items: center;
+}
+.cookie-banner__category:last-child {
+  border-bottom: 0;
+}
+.cookie-banner__category-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* Match the action row's vertical rhythm: label + 4px gap + desc. */
+}
+.cookie-banner__category-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy-900);  /* true white — reads on the dark card */
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.cookie-banner__category-desc {
+  margin: 0;
+  color: var(--grey-500);  /* lighter grey — reads on the dark card */
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.cookie-banner__toggle {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--navy-800);
+  position: relative;
+  transition: background 0.25s var(--ease);
+  flex: 0 0 auto;
+}
+.cookie-banner__toggle[aria-checked="true"] {
+  background: var(--blue-600);
+}
+.cookie-banner__toggle--locked {
+  background: var(--blue-600);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.cookie-banner__toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--white);
+  transition: transform 0.25s var(--ease);
+}
+.cookie-banner__toggle[aria-checked="true"] .cookie-banner__toggle-knob {
+  transform: translateX(20px);
+}
+.cookie-banner__prefs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 0;
+}
+.cookie-banner__prefs-actions .btn {
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: center;
+}
+/* Dialog buttons sit on the dark card; the global .btn--ghost colour
+   (grey-300) is too dim against it. Bump to white for ghost, and add
+   a bright blue border so the buttons read as outlined chips. */
+.cookie-banner__prefs-actions .btn--ghost {
+  border-color: var(--navy-700);
+  color: var(--navy-900);
+}
+.cookie-banner__prefs-actions .btn--ghost:hover {
+  border-color: var(--blue-500);
+  color: var(--blue-500);
+}
+.cookie-banner__prefs-foot {
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding: 16px 0 20px;
+  border-top: 1px solid var(--navy-700);
+  display: flex;
+  justify-content: flex-start;
+}
+.cookie-banner__learnmore {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey-500);  /* lighter grey — reads on the dark surfaces */
+  border-bottom: 1px solid var(--navy-700);
+  padding-top: 7px;
+  padding-bottom: 10px;
+  line-height: 1.2;
+}
+.cookie-banner__learnmore:hover {
+  color: var(--blue-500);
+  border-color: var(--blue-500);
+}
+
+/* Toast after a preference is saved. */
+.cookie-banner__toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 250;
+  background: var(--white);              /* dark navy ground */
+  color: var(--navy-900);                /* white text — reads on the dark ground */
+  border: 1px solid var(--blue-600);
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 32px rgba(12, 27, 42, 0.18);
+}
+
+/* Imprint-specific layout — reuses capability__* classes; only the bits
+   that are unique get new selectors. */
+.imprint__fields {
+  margin: 32px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px 32px;
+}
+.imprint__field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  border-bottom: 1px solid var(--navy-700);
+  padding-bottom: 16px;
+}
+.imprint__field-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+}
+.imprint__field-value {
+  margin: 0;
+  color: var(--white);
+  font-size: 1rem;
+}
+.imprint__field-value a {
+  color: var(--blue-500);
+  border-bottom: 1px solid var(--blue-600);
+}
+@media (min-width: 700px) {
+  .imprint__fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .imprint__field {
+    grid-template-columns: minmax(140px, 0.45fr) 1fr;
+    align-items: baseline;
+    gap: 16px;
+  }
+}
+
+/* Placeholder callout at the end of the page. */
+.imprint__todo {
+  background: var(--navy-850);
+  border-top: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+  padding-block: var(--section-pad-sm);
+}
+.imprint__todo-inner {
+  border-left: 2px solid var(--blue-600);
+  padding-left: var(--content-inset);
+}
+.imprint__todo-title {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+.imprint__todo-body {
+  color: var(--grey-400);
+  max-width: 64ch;
+  margin: 0 0 24px;
+}
+.imprint__todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px 32px;
+}
+@media (min-width: 700px) {
+  .imprint__todo-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.imprint__todo-list li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  color: var(--grey-300);
+  font-size: 0.92rem;
+}
+.imprint__todo-marker {
+  font-size: 0.78rem;
+  color: var(--blue-500);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.imprint__back-cta {
+  padding-block: var(--section-pad-sm);
+  text-align: center;
+}
+
+/* ============================================================
+   Cookie banner — compact (dismissible)
+   ============================================================ */
+
+/* (All compact-banner rules live in the main block above. The
+   --compact modifier is reserved for future variants.) */
+
+/* ============================================================
+   Cookie policy page — /cookies
+   ============================================================ */
+
+.cookie-page__section {
+  margin: 32px 0 0;
+}
+.cookie-page__section p {
+  color: var(--grey-300);
+  line-height: 1.65;
+  max-width: 70ch;
+  margin: 8px 0 0;
+}
+
+/* Current-consent status card. Sits at the top of the body. The
+   card has a left-side accent bar whose color matches the consent
+   state: blue for accepted, red-tinted grey for rejected, neutral
+   navy for "no decision yet". */
+.cookie-page__status-wrap {
+  padding-block: clamp(40px, 5vw, 72px);
+}
+.cookie-page__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 32px;
+  background: var(--white);
+  border: 1px solid var(--navy-700);
+  border-left: 4px solid var(--navy-600);
+  box-shadow: 0 12px 32px rgba(12, 27, 42, 0.06);
+  flex-wrap: wrap;
+}
+.cookie-page__status-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.cookie-page__status-text .eyebrow {
+  margin: 0;
+}
+.cookie-page__status-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin: 4px 0 0;
+  line-height: 1.2;
+}
+.cookie-page__status-value--accepted {
+  color: var(--blue-600);
+}
+.cookie-page__status-value--rejected {
+  color: var(--grey-400);
+}
+.cookie-page__status-value--none {
+  color: var(--grey-500);
+}
+.cookie-page__status-action {
+  flex: 0 0 auto;
+}
+
+/* "Clear local decision" aside. Demoted to a small mono text link
+   below the legal body — the reset action is a convenience, not a
+   required step, and the visual treatment reflects that. */
+.cookie-page__aside {
+  background: var(--navy-850);
+  border-top: 1px solid var(--navy-700);
+  border-bottom: 1px solid var(--navy-700);
+  padding-block: clamp(48px, 6vw, 80px);
+}
+.cookie-page__aside-inner {
+  max-width: 70ch;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cookie-page__aside-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin: 0;
+}
+.cookie-page__aside-body {
+  color: var(--grey-400);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 70ch;
+}
+.cookie-page__aside-reset {
+  align-self: flex-start;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--blue-600);
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-300);
+  cursor: pointer;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+  margin-top: 4px;
+}
+.cookie-page__aside-reset:hover {
+  color: var(--blue-500);
+  border-color: var(--blue-500);
+}
+
+/* Inline link inside the imprint privacy section body, e.g. the link
+   from the cookies section out to /cookies. Uses the same blue accent
+   the rest of the site uses for inline links. */
+.imprint__inline-link {
+  color: var(--blue-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.imprint__inline-link:hover {
+  color: var(--blue-500);
+}
+
+/* ============================================================
+   Help page — /help
+   Three sections: Urgent help, Quick consulting, Help & guides.
+   Reuses .contact__* for form fields, .capability__* for the
+   block layout (left border accent), and .imprint__back-cta
+   for the back-to-home CTA at the bottom.
+   ============================================================ */
+
+/* All three sections get the same vertical rhythm as the imprint
+   sections. The first one has no top padding so it sits flush
+   against the hero; the rest match the section-pad rhythm. */
+.help__urgent-section,
+.help__consult-section,
+.help__guides-section {
+  padding-block: clamp(48px, 6vw, 88px);
+}
+.help__urgent-section {
+  padding-top: clamp(40px, 5vw, 72px);
+}
+
+/* Urgent help — the row with the email address and the "Open a
+   Sev-1 ticket" button. Sits between the section lead and the
+   inline form once it's been opened. */
+.help__urgent-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin: 24px 0 0;
+}
+.help__urgent-mail {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.95rem;
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 1px solid var(--navy-700);
+  padding-bottom: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.help__urgent-mail:hover {
+  color: var(--blue-600);
+  border-bottom-color: var(--blue-600);
+}
+
+/* The forms reuse .contact__form / .contact__row / .contact__input
+   directly so we don't duplicate field styling. .help__form is just
+   a hook for layout tweaks (top margin) when the form is rendered
+   inside .capability__block. */
+.help__form {
+  margin-top: 28px;
+  max-width: 720px;
+}
+.help__form-row {
+  /* Same row layout as the contact form. */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 640px) {
+  .help__form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Success state for both forms. Mirrors .contact__success so the
+   visual treatment is identical to the home-page contact form. */
+.help__success {
+  margin-top: 28px;
+}
+.help__success-title {
+  margin: 12px 0 4px;
+}
+.help__success-body {
+  margin: 0 0 16px;
+}
+
+/* Help & guides — the placeholder CTA. The link is a hairline
+   border button-style with an arrow; the note underneath uses the
+   mono treatment for the "library is being built" disclaimer. */
+.help__guides-cta {
+  margin: 28px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.help__guides-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid var(--navy-700);
+  border-radius: 999px;
+  background: var(--navy-900);
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.help__guides-link:hover {
+  border-color: var(--blue-600);
+  color: var(--blue-600);
+}
+.help__guides-link:hover .arrow {
+  transform: translateX(2px);
+}
+.help__guides-link .arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.help__guides-note {
+  font-size: 0.8rem;
+  color: var(--grey-500);
+  margin: 0;
+  max-width: 56ch;
+  line-height: 1.5;
+}

@@ -1,0 +1,20 @@
+# Discipline pages moved from /capabilities/* to /disciplines/* — perm-
+# redirect the old paths so previously indexed links and inbound links
+# land on the current page instead of the SPA fallback.
+/capabilities/*    /disciplines/:splat    301
+
+# S01: the catch-all `/* /index.html 200` fallback was REMOVED.
+#
+# It made every unknown URL (/this-page-does-not-exist, /help/guides) return
+# HTTP 200 with the full homepage, which is duplicate content for search
+# engines and hides broken links. Without it, Cloudflare Pages serves the
+# prerendered static file for a known route, and 404.html with a real
+# HTTP 404 for anything unknown.
+#
+# Every real route is prerendered to its own index.html by
+# scripts/prerender.mjs, so direct loads and refreshes still work:
+#   /                      dist/index.html
+#   /disciplines/<id>      dist/disciplines/<id>/index.html
+#   /imprint               dist/imprint/index.html
+#   /cookies               dist/cookies/index.html
+#   /help                  dist/help/index.html

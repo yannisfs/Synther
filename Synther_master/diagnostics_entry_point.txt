@@ -1,0 +1,6 @@
+The "Diagnostic" Entry Point (Low-Risk Proof)
+The current page already mentions a "paid assessment or discovery workshop." This is their most powerful tool for a new company.
+
+The Strategy: Instead of trying to sell a €100k full-scale implementation (which requires a massive portfolio), they sell a €5k–€10k "System Audit" or "Constraint Analysis."
+The Pitch: "We don't expect you to trust us with your entire production line on day one. Let us spend three days in your plant, identify your binding constraint, and provide a technical hypothesis. If the hypothesis is wrong, you've lost a few thousand euros. If it's right, you've found the path to 20% efficiency."
+Result: The diagnostic is the proof. It turns the first client into the first case study.

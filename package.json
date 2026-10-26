@@ -1,0 +1,35 @@
+{
+  "name": "synther-gmbh",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Synther GmbH — Systems engineering, process optimization and data-driven decision making.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prerender": "node scripts/prerender.mjs",
+    "deploy": "npm run build && npm run prerender && npx wrangler pages deploy dist --project-name=synther --branch=main --commit-dirty=true",
+    "cf:dev": "npx wrangler pages dev dist --d1=DB --port 8788",
+    "cf:db:create": "npx wrangler d1 create synther-contacts",
+    "cf:db:migrate:local": "npx wrangler d1 migrations apply DB --local",
+    "cf:db:migrate:remote": "npx wrangler d1 migrations apply DB --remote"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.10",
+    "i18next": "^23.16.8",
+    "i18next-browser-languagedetector": "^8.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.7.4",
+    "react-router-dom": "^7.18.4",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "playwright": "^1.64.1",
+    "puppeteer": "^24.0.0",
+    "vite": "^5.4.10"
+  }
+}

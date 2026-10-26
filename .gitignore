@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.env
+.env.*
+!.env.example
+.wrangler
+worker-configuration.d.ts
+test-results
+playwright-report
+verify-baseline.txt
+verify-final.txt
+verify-baseline-v3.txt
+verify-final-v3.txt
+verify-final-v3-legal.txt

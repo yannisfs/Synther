@@ -1,0 +1,7 @@
+
+2. "Proof of Thinking" (The Intellectual Teardown)
+In engineering, the way you solve a problem is often more important than the final result. Since they can't show a finished project, they should show their working.
+
+The "Hypothetical Case Study": They can pick a common industry problem and write a detailed technical breakdown of how they would solve it using their 6-stage approach.
+The Technical Blog/Whitepaper: Instead of a "Services" page, they create a "Thinking" page. They write deep-dives on things like "Why most MBSE (Model-Based Systems Engineering) implementations fail" or "The fallacy of KPI-driven management in brownfield plants."
+Why this works: A sophisticated client will read a technical breakdown and think, "These people think about the problem exactly the way I do. They are the real deal."
