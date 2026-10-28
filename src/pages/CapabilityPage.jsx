@@ -123,6 +123,11 @@ export default function CapabilityPage() {
         })),
       },
     }
+    // The prerendered page already carries this block: the prerender
+    // captured the mounted DOM, so the served HTML ships with it. Remove
+    // it first, otherwise the page ends up with two identical JSON-LD
+    // blocks once React hydrates.
+    document.getElementById('synther-service-schema')?.remove()
     const script = document.createElement('script')
     script.type = 'application/ld+json'
     script.id = 'synther-service-schema'
@@ -133,6 +138,7 @@ export default function CapabilityPage() {
     // page renders — so the questions can never drift from what's visible.
     let faqScript = null
     if (faq.length > 0) {
+      document.getElementById('synther-faq-schema')?.remove()
       faqScript = document.createElement('script')
       faqScript.type = 'application/ld+json'
       faqScript.id = 'synther-faq-schema'

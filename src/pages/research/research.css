@@ -1,0 +1,621 @@
+/* ============================================================
+   Research section (/research/ and /research/<slug>/)
+   Built from the discipline page's own parts: the same hero
+   shell (.capability__hero / __hero-head / __title / __lead),
+   the same block head (.capability__block-head), the same
+   numbered cards (.capability__cap*) and the same CTA band
+   (.capability__cta*). Only the parts the discipline page does
+   not have — the 2x2 hero fact grid, the filter chips, the
+   paper rows, the article typography, the TOC, the result and
+   reproducibility boxes — are new here.
+   ============================================================ */
+
+.research :focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 3px;
+}
+
+/* Placeholder while the Research chunk loads. Only visible on a
+   client-side navigation — a direct load serves the prerendered HTML,
+   which already contains the full page. */
+.research__loading {
+  min-height: 40vh;
+}
+
+/* ---------- Index: hero fact grid ----------
+   The discipline hero uses .capability__spec, which is a single
+   column below 521px. The research facts have to stack 2x2 at
+   375px, so the grid is its own class; the cells reuse the
+   capability cell / label / value styles verbatim. */
+.research__facts {
+  margin: clamp(36px, 5vw, 56px) 0 0;
+  padding: 28px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+@media (min-width: 961px) {
+  .research__facts {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 40px;
+  }
+}
+
+/* ---------- Index: "Our standard" grid ----------
+   Three numbered cards. The capability card grid is two columns
+   from 761px; this one goes straight to three on desktop. */
+.research__std-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--navy-700);
+}
+@media (min-width: 961px) {
+  .research__std-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  /* Hairline column dividers for the three-column layout. The
+     capability grid's own odd-child rule (two columns) does not
+     apply here, so it is cancelled and replaced. */
+  .research__std-grid .capability__cap:nth-child(odd) {
+    border-right: 0;
+  }
+  .research__std-grid .capability__cap:nth-child(3n + 1),
+  .research__std-grid .capability__cap:nth-child(3n + 2) {
+    border-right: 1px solid var(--navy-700);
+  }
+}
+
+/* ---------- Index: papers ---------- */
+.research__papers {
+  background: var(--navy-850);
+  border-bottom: 1px solid var(--navy-700);
+}
+
+/* Filter chips — real buttons, the list is filtered client-side. */
+.research__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.research__chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0 16px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--navy-600);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--grey-300);
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.research__chip:hover {
+  border-color: var(--blue-600);
+  color: var(--white);
+}
+.research__chip[aria-pressed='true'] {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--on-cta);
+}
+
+.research__paper-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--navy-700);
+}
+.research__paper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: clamp(22px, 3vw, 30px) 0;
+  border-bottom: 1px solid var(--navy-700);
+}
+.research__paper-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--grey-500);
+}
+.research__paper-type {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+}
+.research__paper-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0 0 8px;
+}
+.research__paper-title a {
+  color: var(--white);
+}
+.research__paper-title a:hover {
+  color: var(--blue-600);
+}
+.research__paper-result {
+  color: var(--grey-400);
+  font-size: 0.97rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 62ch;
+}
+.research__paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: baseline;
+}
+.research__link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+  transition: color 0.25s var(--ease);
+}
+.research__link:hover {
+  color: var(--blue-500);
+}
+@media (min-width: 861px) {
+  .research__paper {
+    grid-template-columns: 92px 132px minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: start;
+  }
+  .research__paper-links {
+    justify-content: flex-end;
+  }
+}
+
+/* Empty state — the section before the first paper exists. */
+.research__empty {
+  background: var(--navy-900);
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  padding: clamp(24px, 4vw, 44px);
+  max-width: 760px;
+}
+.research__empty-text {
+  color: var(--grey-300);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 0 0 20px;
+  max-width: 56ch;
+}
+.research__empty-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0;
+}
+
+/* ---------- Index: "In progress" agenda ---------- */
+.research__agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--navy-700);
+}
+.research__agenda-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: clamp(18px, 2.5vw, 26px) 0;
+  border-bottom: 1px solid var(--navy-700);
+}
+.research__agenda-topic {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.35;
+}
+.research__agenda-benchmark {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--grey-500);
+}
+.research__status {
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid var(--navy-600);
+  border-radius: 2px;
+  color: var(--grey-400);
+}
+.research__status--running {
+  border-color: var(--blue-600);
+  color: var(--blue-600);
+}
+.research__status--in-review {
+  border-color: var(--blue-600);
+  background: rgba(45, 51, 167, 0.06);
+  color: var(--blue-600);
+}
+@media (min-width: 861px) {
+  .research__agenda-row {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .research__status {
+    justify-self: end;
+  }
+}
+
+/* ============================================================
+   Paper page (/research/<slug>/)
+   ============================================================ */
+.research__head {
+  background: var(--navy-900);
+  border-bottom: 1px solid var(--navy-700);
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+.research__meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin: 0 0 20px;
+}
+.research__meta-type {
+  color: var(--blue-600);
+}
+.research__title {
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.research__authors {
+  color: var(--grey-300);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 28px;
+  max-width: 68ch;
+}
+.research__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Key result box */
+.research__key {
+  background: var(--navy-850);
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  padding: clamp(24px, 3vw, 40px);
+}
+.research__key-label {
+  color: var(--blue-600);
+  margin-bottom: 16px;
+}
+.research__key-text {
+  font-size: clamp(1.12rem, 2vw, 1.4rem);
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* Result tables — the frontmatter table and any table inside the
+   Markdown body share the same rules. */
+.research__table-wrap {
+  margin-top: clamp(24px, 3vw, 32px);
+  overflow-x: auto;
+}
+.research__table,
+.research__article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  text-align: left;
+}
+.research__table th,
+.research__article th {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--grey-500);
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--navy-600);
+  white-space: nowrap;
+}
+.research__table td,
+.research__article td {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--navy-700);
+  color: var(--grey-300);
+  vertical-align: top;
+}
+/* Our own row carries the indigo rail. */
+.research__table tr.is-ours td {
+  color: var(--white);
+}
+.research__table tr.is-ours td:first-child {
+  border-left: 2px solid var(--blue-600);
+  padding-left: 14px;
+}
+
+/* Body: sticky table of contents + article */
+.research__body-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 4vw, 56px);
+}
+.research__toc {
+  display: none;
+}
+.research__toc-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin: 0 0 16px;
+}
+.research__toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.research__toc a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--grey-400);
+}
+.research__toc a:hover {
+  color: var(--blue-600);
+}
+@media (min-width: 1024px) {
+  .research__body-grid {
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: start;
+  }
+  .research__toc {
+    display: block;
+    /* Nav height (70px) + 24px, the same offset the help page uses
+       for its anchor targets. */
+    position: sticky;
+    top: 96px;
+  }
+}
+
+/* Article typography — 19px reading size, narrower measure than
+   the marketing copy. */
+.research__article {
+  max-width: 720px;
+  font-size: 1.19rem;
+  line-height: 1.65;
+  color: var(--grey-300);
+}
+.research__article > :first-child {
+  margin-top: 0;
+}
+.research__article h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--white);
+  margin: 48px 0 16px;
+  scroll-margin-top: 96px;
+}
+.research__article h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--white);
+  margin: 32px 0 12px;
+  scroll-margin-top: 96px;
+}
+.research__article p {
+  margin: 0 0 20px;
+}
+.research__article ul,
+.research__article ol {
+  margin: 0 0 20px;
+  padding-left: 22px;
+}
+.research__article li {
+  margin-bottom: 8px;
+}
+.research__article li > p {
+  margin-bottom: 8px;
+}
+.research__article a {
+  color: var(--blue-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.research__article strong {
+  color: var(--white);
+  font-weight: 600;
+}
+.research__article code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--navy-850);
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+.research__article pre {
+  background: var(--navy-850);
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  padding: 18px 20px;
+  margin: 0 0 24px;
+  overflow-x: auto;
+}
+.research__article pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--grey-300);
+}
+.research__article blockquote {
+  margin: 0 0 24px;
+  padding-left: 18px;
+  border-left: 2px solid var(--navy-600);
+  color: var(--grey-400);
+}
+.research__article figure {
+  margin: 0 0 28px;
+}
+.research__article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--navy-700);
+  background: var(--navy-850);
+}
+.research__article figcaption {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--grey-500);
+}
+.research__article hr {
+  border: 0;
+  border-top: 1px solid var(--navy-700);
+  margin: 40px 0;
+}
+/* A display formula must not push the page sideways on a phone. */
+.research__article .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+/* Reproducibility box */
+.research__repro-box {
+  background: var(--navy-850);
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  padding: clamp(24px, 3vw, 40px);
+}
+.research__repro-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin: 0;
+}
+.research__repro-list dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-bottom: 6px;
+}
+.research__repro-list dd {
+  margin: 0;
+  color: var(--grey-300);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.research__repro-list dd.mono {
+  font-size: 0.85rem;
+}
+.research__repro-list a {
+  color: var(--blue-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (min-width: 761px) {
+  .research__repro-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 40px;
+  }
+}
+
+/* Cite this */
+.research__cite-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.research__cite-head .eyebrow {
+  margin: 0;
+}
+.research__bib {
+  background: var(--navy-850);
+  border: 1px solid var(--navy-700);
+  border-radius: 2px;
+  padding: 20px 22px;
+  margin: 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--grey-300);
+}
+
+/* Changelog */
+.research__versions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--navy-700);
+}
+.research__version {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--navy-700);
+}
+.research__version-num {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--blue-600);
+}
+.research__version-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--grey-500);
+}
+.research__version-note {
+  color: var(--grey-300);
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+@media (min-width: 561px) {
+  .research__version {
+    grid-template-columns: 64px 120px minmax(0, 1fr);
+    gap: 18px;
+    align-items: baseline;
+  }
+}
+
+/* More research — the same row style as the index list. */
+.research__more .research__paper-list {
+  border-top-color: var(--navy-600);
+}

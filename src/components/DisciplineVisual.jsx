@@ -220,6 +220,74 @@ const MOTIFS = {
     )
   },
 
+  // Research — a paper page with text lines, wired into a small citation
+  // graph. Abstract geometry only: no axes, no numbers, nothing that could
+  // be misread as a result or a chart.
+  research: () => {
+    const px = 340
+    const py = 70
+    const pw = 220
+    const ph = 300
+    const nodes = [
+      { x: 190, y: 130 },
+      { x: 250, y: 90 },
+      { x: 285, y: 185 },
+      { x: 175, y: 245 },
+      { x: 245, y: 305 },
+    ]
+    return (
+      <g>
+        <rect
+          x={px}
+          y={py}
+          width={pw}
+          height={ph}
+          rx="3"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          opacity="0.45"
+        />
+        {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+          <line
+            key={`t${i}`}
+            x1={px + 24}
+            y1={py + 44 + i * 34}
+            x2={px + pw - (i % 3 === 0 ? 92 : 32)}
+            y2={py + 44 + i * 34}
+            stroke="currentColor"
+            strokeWidth="1"
+            opacity="0.32"
+          />
+        ))}
+        {nodes.slice(0, -1).map((n, i) => (
+          <line
+            key={`c${i}`}
+            x1={n.x}
+            y1={n.y}
+            x2={nodes[i + 1].x}
+            y2={nodes[i + 1].y}
+            stroke="currentColor"
+            strokeWidth="1.1"
+            opacity="0.6"
+          />
+        ))}
+        <line
+          x1={nodes[4].x}
+          y1={nodes[4].y}
+          x2={px}
+          y2={py + ph}
+          stroke="currentColor"
+          strokeWidth="1.1"
+          opacity="0.6"
+        />
+        {nodes.map((n, i) => (
+          <Node key={`n${i}`} x={n.x} y={n.y} r={i === nodes.length - 1 ? 6 : 4} />
+        ))}
+      </g>
+    )
+  },
+
   // Consulting — a lens / aperture: concentric rings, a focal cross, a scan
   // line. The focused, independent-review idea as optics.
   consulting: () => {

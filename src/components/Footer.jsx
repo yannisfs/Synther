@@ -22,7 +22,10 @@ export default function Footer() {
         </div>
 
         <nav className="footer__col" aria-label="Footer navigation">
-          <h4 className="footer__col-title mono">{t('footer.navTitle')}</h4>
+          {/* h3, not h4: the footer's column titles follow the last heading
+              of the page, which is an h2 on some pages (/research/, /help/).
+              An h4 there would skip a level. */}
+          <h3 className="footer__col-title mono">{t('footer.navTitle')}</h3>
           <ul>
             {nav.map((n) => (
               <li key={n.href}>
@@ -33,7 +36,7 @@ export default function Footer() {
         </nav>
 
         <div className="footer__col">
-          <h4 className="footer__col-title mono">{t('footer.legalTitle')}</h4>
+          <h3 className="footer__col-title mono">{t('footer.legalTitle')}</h3>
           <ul>
             <li>
               <a href={`mailto:${company.email}`}>{company.email}</a>

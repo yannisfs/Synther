@@ -13,11 +13,13 @@
     "imprint": "Imprint & Privacy · Synther",
     "cookies": "Cookie Policy · Synther",
     "help": "Support · Synther",
+    "research": "Research · Synther",
     "notFound": "Page not found · Synther"
   },
   "nav": {
     "offerings": "Disciplines",
     "approach": "Approach",
+    "research": "Research",
     "help": "Support",
     "cta": "Start a project",
     "openMenu": "Open menu",
@@ -1144,6 +1146,133 @@
     "errorConsent": "Please confirm you're happy to be contacted about this request.",
     "seo": {
       "description": "Open a Sev-1 ticket for a system that is down, or request a 30-minute engineering consult before you commit. Support for Synther customers."
+    }
+  },
+  "research": {
+    "docTitle": "Research · Synther",
+    "seoDescription": "Published research from Synther: public benchmarks, published baselines re-run under the same conditions, and the code that reproduces every result.",
+    "feed": {
+      "title": "Synther Research",
+      "description": "Published research from Synther: public benchmarks, published baselines re-run under the same conditions, and the code that reproduces every result."
+    },
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Research",
+    "title": "Research",
+    "intro": "Known problems, public benchmarks, published baselines. We show our work, including the code to reproduce it.",
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Preprint, code and data"
+      },
+      {
+        "label": "Benchmarks",
+        "value": "Public only"
+      },
+      {
+        "label": "Baselines",
+        "value": "Published and re-run"
+      },
+      {
+        "label": "Code",
+        "value": "Open and reproducible"
+      }
+    ],
+    "types": {
+      "efficiency": "Efficiency",
+      "reproduction": "Reproduction",
+      "record": "Record"
+    },
+    "standard": {
+      "eyebrow": "Our standard",
+      "title": "What every paper must show",
+      "items": [
+        {
+          "title": "A public benchmark",
+          "text": "The problem and data are ones anyone can download. No private datasets behind a claim."
+        },
+        {
+          "title": "Published baselines, re-run",
+          "text": "We compare against the best published results and re-run them where we can, under the same conditions."
+        },
+        {
+          "title": "Code that reproduces it",
+          "text": "Every figure in a paper can be regenerated from the linked repository with one command."
+        }
+      ]
+    },
+    "papers": {
+      "eyebrow": "Papers",
+      "title": "Published work",
+      "filterAll": "All",
+      "filterLabel": "Filter papers by type",
+      "empty": "The first paper is in preparation. Follow along via the feed or get in touch.",
+      "emptyFeed": "Follow the feed",
+      "emptyContact": "Get in touch",
+      "read": "Read",
+      "preprint": "Preprint",
+      "code": "Code",
+      "count": "{{count}} paper",
+      "countPlural": "{{count}} papers"
+    },
+    "agenda": {
+      "eyebrow": "In progress",
+      "title": "What we are working on",
+      "status": {
+        "planned": "Planned",
+        "running": "Running",
+        "in-review": "In review"
+      }
+    },
+    "cta": {
+      "title": "Know a benchmark industry gets wrong?",
+      "text": "Send it to us. If it is public and reproducible, we will take a look.",
+      "button": "Get in touch"
+    },
+    "paper": {
+      "docTitle": "{{short}} · Synther Research",
+      "breadcrumbResearch": "Research",
+      "keyResult": "Key result",
+      "preprint": "Preprint",
+      "code": "Code",
+      "cite": "Cite",
+      "repro": {
+        "eyebrow": "Reproducibility",
+        "title": "Reproducibility",
+        "repository": "Repository",
+        "commit": "Commit",
+        "dataset": "Dataset",
+        "hardware": "Hardware",
+        "runtime": "Runtime",
+        "command": "Reproduce with"
+      },
+      "citation": {
+        "eyebrow": "Cite this",
+        "title": "Cite this",
+        "copy": "Copy",
+        "copied": "Copied"
+      },
+      "changelog": {
+        "eyebrow": "Changelog",
+        "title": "Changelog"
+      },
+      "more": {
+        "eyebrow": "More research",
+        "title": "More research"
+      },
+      "toc": {
+        "label": "On this page"
+      },
+      "table": {
+        "method": "Method",
+        "metric": "Metric",
+        "value": "Value",
+        "cost": "Cost"
+      },
+      "notFound": {
+        "title": "Paper not found",
+        "body": "That paper does not exist, or it has not been published yet.",
+        "cta": "Back to research"
+      }
     }
   },
   "imprint": {

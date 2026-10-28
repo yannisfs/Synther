@@ -46,6 +46,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const { offerings } = await import(
   path.join(__dirname, '..', 'src', 'data', 'content.js')
 )
+// The Research papers are content, not code: the route list is generated
+// from the same folder the app reads (src/content/research/<slug>/index.md).
+// Drafts are excluded here exactly as they are in the browser bundle, so a
+// draft never gets a prerendered page.
+const { readPapers } = await import(path.join(__dirname, 'lib', 'research-files.mjs'))
+const papers = await readPapers()
 
 const ROUTES = [
   '/',
@@ -53,6 +59,8 @@ const ROUTES = [
   '/imprint',
   '/cookies',
   '/help',
+  '/research',
+  ...papers.map((p) => `/research/${p.slug}`),
   // S01: prerendered to dist/404.html (not a directory) so Cloudflare
   // Pages serves it with a real HTTP 404 status for unknown URLs.
   '/404',
@@ -99,7 +107,17 @@ const startServer = () =>
           stat = await fs.stat(filePath)
         }
         if (stat.isDirectory()) {
-          filePath = path.join(filePath, 'index.html')
+          // A directory without an index.html is not a route yet: the
+          // feed build step creates dist/research/ (for feed.xml) before
+          // this script prerenders dist/research/index.html. Serve the
+          // SPA shell for it, the way an unknown path is served.
+          const index = path.join(filePath, 'index.html')
+          try {
+            await fs.access(index)
+            filePath = index
+          } catch {
+            filePath = path.join(DIST_DIR, 'index.html')
+          }
         }
         const ext = path.extname(filePath).toLowerCase()
         const body = await fs.readFile(filePath)

@@ -772,7 +772,9 @@
   flex-direction: column;
   gap: 8px;
   margin-top: 28px;
-  color: var(--grey-500);
+  /* grey-400, not grey-500: the copyright line is 11.8px on white, and
+     grey-500 is 3.42:1 — below the WCAG AA minimum of 4.5:1. */
+  color: var(--grey-400);
   font-size: 0.74rem;
   letter-spacing: 0.06em;
 }
@@ -1265,10 +1267,12 @@ a.contact__direct-value:hover {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
-  color: var(--grey-500);
+  /* grey-400, not grey-500: at 11.5px on white, grey-500 is 3.42:1 and
+     fails WCAG AA (4.5:1). grey-400 is 5.78:1. */
+  color: var(--grey-400);
 }
 .capability__crumb a {
-  color: var(--grey-500);
+  color: var(--grey-400);
   transition: color 0.2s var(--ease);
 }
 .capability__crumb a:hover {

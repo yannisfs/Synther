@@ -559,6 +559,314 @@ const checks = {
       const lines = Math.round(h.getBoundingClientRect().height / lh);
       return lines <= 2 ? true : `${lines} lines`;
     }))],
+
+  // ---------- Research section ----------
+  // The Research pages are their own section, so they get their own
+  // checks instead of being folded into PAGES: the section has its own
+  // empty state, its own feed and its own paper routes.
+
+  R01: ['Research index: no JavaScript errors, one h1, ordered headings, labelled breadcrumb', async () => {
+    const r = await onPage('/research/', async ({ page, errors }) => {
+      if (errors.length) return `JS errors: ${errors.join('; ').slice(0, 200)}`;
+      const dom = await page.evaluate(() => {
+        const main = document.querySelector('main') || document.body;
+        const headings = [...main.querySelectorAll('h1,h2,h3,h4,h5,h6')]
+          .filter((h) => h.offsetParent !== null)
+          .map((h) => ({ level: Number(h.tagName[1]), text: h.textContent.trim().slice(0, 40) }));
+        const crumbs = document.querySelectorAll('nav[aria-label="Breadcrumb"]');
+        const current = document.querySelector('nav[aria-label="Breadcrumb"] [aria-current="page"]');
+        return {
+          h1: main.querySelectorAll('h1').length,
+          headings,
+          crumbs: crumbs.length,
+          current: current ? current.textContent.trim() : null,
+        };
+      });
+      const problems = [];
+      if (dom.h1 !== 1) problems.push(`${dom.h1} h1 elements`);
+      // No level may be skipped on the way down: h2 -> h4 is a broken outline.
+      let prev = dom.headings.length ? dom.headings[0].level : 1;
+      for (const h of dom.headings.slice(1)) {
+        if (h.level > prev + 1) problems.push(`h${prev} -> h${h.level} at "${h.text}"`);
+        prev = h.level;
+      }
+      if (dom.crumbs !== 1) problems.push(`${dom.crumbs} breadcrumb navs`);
+      if (!dom.current) problems.push('no aria-current="page" in the breadcrumb');
+      return problems.length ? problems.join(' | ') : true;
+    });
+    return ok(r === true, r === true ? '' : r);
+  }],
+
+  R02: ['Research index: canonical, og:url, description, social image and RSS link', async () => {
+    const r = await onPage('/research/', async ({ page }) => {
+      const d = await page.evaluate(() => {
+        const q = (s) => document.querySelector(s);
+        return {
+          canonical: q('link[rel=canonical]')?.href ?? null,
+          ogUrl: q('meta[property="og:url"]')?.content ?? null,
+          desc: q('meta[name=description]')?.content ?? null,
+          ogDesc: q('meta[property="og:description"]')?.content ?? null,
+          ogImage: q('meta[property="og:image"]')?.content ?? null,
+          ogImageW: q('meta[property="og:image:width"]')?.content ?? null,
+          twitterCard: q('meta[name="twitter:card"]')?.content ?? null,
+          rss: q('link[rel=alternate][type="application/rss+xml"]')?.href ?? null,
+          ld: document.querySelectorAll('script[type="application/ld+json"]').length,
+        };
+      });
+      const want = SITE + '/research/';
+      const bad = [];
+      if (d.canonical !== want) bad.push(`canonical=${d.canonical}`);
+      if (d.ogUrl !== want) bad.push(`og:url=${d.ogUrl}`);
+      if (!d.desc) bad.push('no description');
+      if (!d.ogDesc) bad.push('no og:description');
+      if (!d.ogImage?.endsWith('.png')) bad.push(`og:image=${d.ogImage}`);
+      if (d.ogImageW !== '1200') bad.push(`og:image:width=${d.ogImageW}`);
+      if (d.twitterCard !== 'summary_large_image') bad.push(`twitter:card=${d.twitterCard}`);
+      if (d.rss !== want.replace(/\/$/, '') + '/feed.xml') bad.push(`rss=${d.rss}`);
+      if (d.ld < 2) bad.push(`${d.ld} JSON-LD blocks`);
+      return bad.length ? bad.join(', ') : true;
+    });
+    return ok(r === true, r === true ? '' : r);
+  }],
+
+  R03: ['Research index: no horizontal overflow at 375 px', async () => {
+    const r = await onPage('/research/', ({ page }) => page.evaluate(() => {
+      const w = document.documentElement.clientWidth;
+      if (document.documentElement.scrollWidth <= w) return true;
+      const wide = [...document.querySelectorAll('body *')]
+        .map((el) => {
+          const r = el.getBoundingClientRect();
+          return { sel: el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : ''), right: Math.round(r.right), width: Math.round(r.width) };
+        })
+        .filter((x) => x.right > w + 1)
+        .slice(0, 4);
+      return `scrollWidth ${document.documentElement.scrollWidth} > ${w}; widest: ${wide.map((x) => `${x.sel} (right ${x.right})`).join(', ')}`;
+    }), { width: 375, height: 800 });
+    return ok(r === true, r === true ? '' : r);
+  }],
+
+  R04: ['Research index: every focusable element inside the section shows a focus ring', async () => {
+    const r = await onPage('/research/', async ({ page }) => {
+      // Walk the section with the keyboard, the way a keyboard user does.
+      await page.evaluate(() => document.querySelector('.research')?.scrollIntoView());
+      const seen = [];
+      for (let i = 0; i < 25; i++) {
+        await page.keyboard.press('Tab');
+        const info = await page.evaluate(() => {
+          const el = document.activeElement;
+          if (!el || el === document.body) return null;
+          const cs = getComputedStyle(el);
+          const outline = parseFloat(cs.outlineWidth) || 0;
+          const shadow = cs.boxShadow && cs.boxShadow !== 'none';
+          return {
+            tag: el.tagName,
+            label: (el.textContent || '').trim().slice(0, 24),
+            inSection: !!(el.closest('.research') || el.closest('main')),
+            visible: outline > 0 || shadow,
+          };
+        });
+        if (!info) continue;
+        seen.push(info);
+        if (info.inSection) break; // one focus stop inside the section is enough
+      }
+      const stops = seen.filter((s) => s.inSection);
+      if (!stops.length) return 'no focusable element found inside the section';
+      const blind = stops.filter((s) => !s.visible);
+      return blind.length
+        ? blind.map((b) => `${b.tag} "${b.label}" has no focus ring`).join(' | ')
+        : true;
+    });
+    return ok(r === true, r === true ? '' : r);
+  }],
+
+  R05: ['Research index: text meets the WCAG AA contrast ratio', async () => {
+    const r = await onPage('/research/', ({ page }) => page.evaluate(() => {
+      const rgb = (s) => (s.match(/[\d.]+/g) || []).map(Number);
+      const lum = ([r, g, b]) => {
+        const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      };
+      const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+      // The nearest opaque background behind an element, walking up the tree.
+      const bgOf = (el) => {
+        for (let e = el; e; e = e.parentElement) {
+          const c = rgb(getComputedStyle(e).backgroundColor);
+          if (c.length >= 3 && (c[3] === undefined || c[3] >= 0.5)) return c.slice(0, 3);
+        }
+        return [255, 255, 255];
+      };
+      const targets = [
+        ['.research__empty-text', 4.5],
+        ['.research__facts .capability__spec-label', 4.5],
+        ['.research__facts .capability__spec-value', 4.5],
+        ['.capability__lead', 4.5],
+        ['.research__std-grid .capability__cap-text', 4.5],
+        ['.research__std-grid .capability__cap-title', 4.5],
+        ['.section-lead', 4.5],
+        ['.eyebrow', 4.5],
+        ['.capability__h2', 4.5],
+        ['.research__link', 4.5],
+        ['.research__empty-links a', 4.5],
+      ];
+      const bad = [];
+      let measured = 0;
+      for (const [sel, min] of targets) {
+        const el = document.querySelector(sel);
+        if (!el) continue; // not rendered on this page (e.g. no papers yet)
+        measured++;
+        const cs = getComputedStyle(el);
+        const fg = rgb(cs.color).slice(0, 3);
+        const size = parseFloat(cs.fontSize);
+        const weight = Number(cs.fontWeight) || 400;
+        const large = size >= 24 || (size >= 18.66 && weight >= 700);
+        const need = large ? 3 : min;
+        const r = ratio(fg, bgOf(el));
+        if (r < need) bad.push(`${sel} ${r.toFixed(2)}:1 (need ${need}:1)`);
+      }
+      if (!measured) return 'no contrast target found';
+      return bad.length ? bad.join(' | ') : true;
+    }));
+    return ok(r === true, r === true ? '' : r);
+  }],
+
+  R06: ['Research index: the empty state links to the feed and to the contact form', async () => {
+    const r = await onPage('/research/', async ({ page }) => {
+      const d = await page.evaluate(() => ({
+        empty: !!document.querySelector('.research__empty'),
+        links: [...document.querySelectorAll('.research__empty a')].map((a) => a.getAttribute('href')),
+        filterChips: document.querySelectorAll('.research__chip').length,
+        paperRows: document.querySelectorAll('.research__paper').length,
+      }));
+      const bad = [];
+      if (d.paperRows > 0) {
+        // With papers there is a list, and the list has a type filter.
+        if (!d.filterChips) bad.push('no type filter');
+        return bad.length ? bad.join(', ') : true;
+      }
+      // With no paper yet the section shows the empty state instead.
+      if (!d.empty) bad.push('no empty state');
+      if (!d.links.some((h) => /\/research\/feed\.xml$/.test(h || ''))) bad.push('no feed link');
+      if (!d.links.some((h) => /#contact$/.test(h || ''))) bad.push('no contact link');
+      return bad.length ? bad.join(', ') : true;
+    });
+    return ok(r === true, r === true ? '' : r);
+  }],
+
+  R07: ['Research: the header nav links to the section on the home page and on the index', async () => {
+    const fails = [];
+    for (const p of ['/', '/research/']) {
+      const r = await onPage(p, async ({ page }) => {
+        const hrefs = await page.evaluate(() =>
+          [...document.querySelectorAll('header a')].map((a) => a.getAttribute('href')));
+        return hrefs.some((h) => h === '/research' || h === '/research/') ? true : `header links ${JSON.stringify(hrefs)}`;
+      });
+      if (r !== true) fails.push(`${p}: ${r}`);
+    }
+    return ok(!fails.length, fails.join(' | '));
+  }],
+
+  R08: ['Research paper pages: one h1, ordered headings, Scholar meta tags, canonical', async () => {
+    // The published papers are exactly the /research/<slug>/ URLs in the
+    // sitemap. With no paper published yet the check skips.
+    const api = await request.newContext();
+    let xml = '';
+    try {
+      const res = await api.get(BASE + '/sitemap.xml');
+      xml = await res.text();
+    } catch {
+      /* handled below */
+    }
+    await api.dispose();
+    const paperUrls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+      .map((m) => m[1])
+      .filter((u) => /\/research\/[^/]+\/$/.test(u))
+      .map((u) => new URL(u).pathname);
+    if (!paperUrls.length) return { skip: true, detail: 'no published paper' };
+    const fails = [];
+    for (const p of paperUrls) {
+      const r = await onPage(p, async ({ page, errors }) => {
+        if (errors.length) return `JS errors: ${errors.join('; ').slice(0, 160)}`;
+        const d = await page.evaluate(() => {
+          const main = document.querySelector('main') || document.body;
+          const levels = [...main.querySelectorAll('h1,h2,h3,h4,h5,h6')]
+            .filter((h) => h.offsetParent !== null)
+            .map((h) => Number(h.tagName[1]));
+          const q = (s) => document.querySelector(s);
+          const names = (s) => [...document.querySelectorAll(s)].map((m) => m.content);
+          return {
+            h1: main.querySelectorAll('h1').length,
+            levels,
+            canonical: q('link[rel=canonical]')?.href ?? null,
+            title: document.title,
+            scholarTitle: q('meta[name="citation_title"]')?.content ?? null,
+            authors: names('meta[name="citation_author"]').length,
+            date: q('meta[name="citation_publication_date"]')?.content ?? null,
+            current: q('nav[aria-label="Breadcrumb"] [aria-current="page"]')?.textContent ?? null,
+            toc: document.querySelectorAll('.research__toc a').length,
+            cite: q('#cite')?.textContent?.includes('@') ?? false,
+          };
+        });
+        const bad = [];
+        if (d.h1 !== 1) bad.push(`${d.h1} h1`);
+        let prev = d.levels.length ? d.levels[0] : 1;
+        for (const l of d.levels.slice(1)) {
+          if (l > prev + 1) bad.push(`h${prev} -> h${l}`);
+          prev = l;
+        }
+        if (!d.canonical) bad.push('no canonical');
+        if (!d.scholarTitle) bad.push('no citation_title');
+        if (!d.authors) bad.push('no citation_author');
+        if (!d.date) bad.push('no citation_publication_date');
+        if (!d.current) bad.push('no aria-current in the breadcrumb');
+        if (!d.cite) bad.push('no citation block');
+        return bad.length ? bad.join(', ') : true;
+      });
+      if (r !== true) fails.push(`${p}: ${r}`);
+      // The paper body carries wide tables and formulas — they have to
+      // scroll inside their own box, not push the page sideways.
+      const m = await onPage(p, ({ page }) => page.evaluate(() =>
+        document.documentElement.scrollWidth <= document.documentElement.clientWidth
+          ? true : `scrollWidth ${document.documentElement.scrollWidth} > ${document.documentElement.clientWidth}`
+      ), { width: 375, height: 800 });
+      if (m !== true) fails.push(`${p} at 375 px: ${m}`);
+    }
+    return ok(!fails.length, fails.join(' | '));
+  }],
+
+  R09: ['Research feed: valid RSS 2.0 with the published papers', async () => {
+    const api = await request.newContext();
+    let body = '';
+    let type = '';
+    try {
+      const res = await api.get(BASE + '/research/feed.xml');
+      type = res.headers()['content-type'] || '';
+      body = await res.text();
+    } catch (e) {
+      await api.dispose();
+      return ok(false, `feed not reachable: ${e.message.split('\n')[0]}`);
+    }
+    await api.dispose();
+    const bad = [];
+    if (!/xml/.test(type)) bad.push(`content-type=${type}`);
+    if (!/<rss[^>]*version="2\.0"/.test(body)) bad.push('no rss version="2.0"');
+    if (!/<channel>/.test(body)) bad.push('no channel');
+    if (!/<title>/.test(body)) bad.push('no channel title');
+    // Tag balance — a well-formed document has no unclosed element.
+    const stack = [];
+    for (const m of body.matchAll(/<\/?([a-zA-Z0-9:]+)[^>]*?(\/?)>/g)) {
+      const [full, name, selfClose] = m;
+      if (full.startsWith('<?') || full.startsWith('<!')) continue;
+      if (full.startsWith('</')) {
+        const top = stack.pop();
+        if (top !== name) { bad.push(`</${name}> closes <${top}>`); break; }
+      } else if (!selfClose && !full.endsWith('/>')) {
+        stack.push(name);
+      }
+    }
+    if (stack.length) bad.push(`unclosed: ${stack.join(',')}`);
+    const items = (body.match(/<item>/g) || []).length;
+    return ok(!bad.length, bad.join(', ') + (bad.length ? '' : ` (${items} item(s))`));
+  }],
 };
 
 // ---------- runner ----------

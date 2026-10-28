@@ -47,6 +47,10 @@ export const SITE_URL = 'https://synther.eu'
 export const nav = [
   { key: 'offerings', href: '#offerings' },
   { key: 'approach', href: '#approach' },
+  // The Research section (/research/). Between Approach and Support, as the
+  // plan asks. Absolute path, so useHomeLink() passes it through unchanged
+  // on every route (the hash links above are home-page anchors).
+  { key: 'research', href: '/research' },
   { key: 'help', href: '/help' },
 ]
 
