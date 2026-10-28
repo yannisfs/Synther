@@ -1,12 +1,14 @@
-// Private-person imprint template — ACTIVE.
+// Private-person imprint template — FALLBACK.
 //
-// This is the imprint that ships while the Synther GmbH registration is
-// still pending. The page is filed under a private individual (the
-// operator's own name + private address) per § 5 DDG. Once the GmbH is
-// registered, the user flips one line in src/pages/ImprintPage.jsx
-// (the re-export shim) to point at './ImprintPage.gmbh.jsx' and the
-// registered-company imprint goes live. The GmbH template at
-// ImprintPage.gmbh.jsx is preserved verbatim — do not edit it.
+// This is the imprint that shipped while the Synther GmbH registration
+// was still pending. The page is filed under a private individual (the
+// operator's own name + private address) per § 5 DDG. The site now runs
+// the GmbH template instead (src/pages/ImprintPage.jsx, the one-line
+// re-export shim, points at './ImprintPage.gmbh.jsx').
+//
+// To go back to the private-person imprint: restore the three Person
+// values in `legalIdentity` (src/data/content.js) and point the shim
+// back at './ImprintPage.private.jsx'.
 //
 // This file mirrors the structure of ImprintPage.gmbh.jsx. The two
 // diverge in five places only:

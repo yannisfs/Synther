@@ -11,6 +11,11 @@ export const company = {
   // (e.g. '+49 176 12345678') — the tel: link is derived from it by
   // phoneHref() below.
   phone: null,
+  // The managing director(s) of the GmbH, as entered in the commercial
+  // register. Listed in the imprint as "Gesetzlicher Vertreter" and named
+  // as the person responsible under § 18 (2) MStV. Correct this here if
+  // the register extract names someone else.
+  representative: 'Yannis Fusenig',
 }
 
 // tel: href for a published phone number — strips the formatting
@@ -18,25 +23,27 @@ export const company = {
 export const phoneHref = (phone) =>
   phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : null
 
-// The party behind the site, as currently registered: a private person.
+// The party behind the site: Synther GmbH.
 //
-// The Synther GmbH registration is still pending, so the site is published
-// under the operator's own name and private address (§ 5 DDG). The footer's
-// legal column, the footer copyright, the structured data and the imprint
-// page all read these two values from here, so the legal indicators shown
-// on the site can never drift apart.
+// The footer's legal column, the footer copyright, the structured data
+// and the imprint page all read these three values from here, so the
+// legal indicators shown on the site can never drift apart.
 //
-// The GmbH wording is kept right below, commented out, so switching back
-// once the registration is complete is a two-line change here plus the
-// imprint switch in src/pages/ImprintPage.jsx — the same pattern the two
-// imprint templates use.
+// The address below is the address the site has been publishing. If the
+// registered business address (Geschäftsanschrift) differs, change it
+// here — the footer and the imprint follow automatically.
+//
+// To go back to the private-person imprint (the fallback used while the
+// registration was pending), restore the three Person values below and
+// flip the re-export in src/pages/ImprintPage.jsx to
+// './ImprintPage.private.jsx'.
 export const legalIdentity = {
-  // legalName: 'Synther GmbH',
-  // address: 'the registered business address',
-  // type: 'Organization',
-  legalName: 'Yannis Fusenig',
+  legalName: 'Synther GmbH',
   address: 'Ludwigstraße 4A, 63110 Rodgau, Germany',
-  type: 'Person',
+  type: 'Organization',
+  // legalName: 'Yannis Fusenig',
+  // address: 'Ludwigstraße 4A, 63110 Rodgau, Germany',
+  // type: 'Person',
 }
 
 // The production origin. Canonical URLs and og:url are built from this

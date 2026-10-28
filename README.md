@@ -204,9 +204,11 @@ Plans/             implementation and edit plans
 ## Things worth knowing
 
 - **The imprint has two templates.** `src/pages/ImprintPage.jsx` is a
-  one-line re-export shim that points at `.private.jsx` (private person) or
-  `.gmbh.jsx` (company). Switching back after the registration is done means
-  editing that one line.
+  one-line re-export shim that currently points at `.gmbh.jsx` (the
+  Synther GmbH); `.private.jsx` is the private-person fallback. The GmbH
+  template still carries open placeholders for the commercial-register and
+  VAT rows, so the imprint is not deployable until those are filled in —
+  `DEPLOY.md` lists exactly which ones.
 - **The research routes are preloaded before hydration.** `React.lazy`
   always suspends once, even when the module is already loaded, which
   replaced the prerendered research page with the fallback for a frame and
